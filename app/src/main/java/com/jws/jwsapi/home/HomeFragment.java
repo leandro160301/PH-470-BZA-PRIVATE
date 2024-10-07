@@ -38,7 +38,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class HomeFragment extends Fragment implements WeightConformationListener, GpioHighListener {
+public class HomeFragment extends Fragment implements WeightConformationListener{
 
     private static final int OPERATION_BUTTONS = 0;
     private static final int SCALE_BUTTONS = 1;
@@ -50,8 +50,6 @@ public class HomeFragment extends Fragment implements WeightConformationListener
     PalletRepository palletRepository;
     @Inject
     ScaleViewModel.Factory viewModelFactory;
-    @Inject
-    GpioManager gpioManager;
     private HomeFragmentBinding binding;
     private ContainerButtonProvider buttonProvider;
     private MainActivity mainActivity;
@@ -97,7 +95,6 @@ public class HomeFragment extends Fragment implements WeightConformationListener
         serviceScaleViewModel.setWeightListener(this);
 
         palletViewModel = new ViewModelProvider(this).get(PalletViewModel.class);
-        gpioManager.setHighListener(this);
     }
 
     private void observeViewModels() {
@@ -269,24 +266,10 @@ public class HomeFragment extends Fragment implements WeightConformationListener
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        gpioManager.setHighListener(null);
     }
 
     @Override
     public void onWeightConformed() {
         getActivity().runOnUiThread(this::createWeighing);
-    }
-
-    @Override
-    public void onInputHigh(int input) {
-        if (getActivity() != null) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    messageError("prendio la:" + input);
-                }
-            });
-        }
-
     }
 }
