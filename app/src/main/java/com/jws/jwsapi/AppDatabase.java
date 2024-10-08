@@ -8,7 +8,7 @@ import com.jws.jwsapi.pallet.PalletDao;
 import com.jws.jwsapi.weighing.Weighing;
 import com.jws.jwsapi.weighing.WeighingDao;
 
-@Database(entities = {Pallet.class, Weighing.class}, version = 6)
+@Database(entities = {Pallet.class, Weighing.class}, version = 7)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PalletDao palletDao();
 

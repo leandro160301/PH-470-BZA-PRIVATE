@@ -40,6 +40,9 @@ public class Pallet {
     @ColumnInfo(name = "total_net")
     private String totalNet;
 
+    @ColumnInfo(name = "api_net")
+    private String apiNet;
+
     public int getId() {
         return id;
     }
@@ -126,6 +129,14 @@ public class Pallet {
 
     public void setTotalNet(String totalNet) {
         this.totalNet = totalNet;
+    }
+
+    public String getApiNet() {
+        return apiNet;
+    }
+
+    public void setApiNet(String apiNet) {
+        this.apiNet = apiNet;
     }
 
 }

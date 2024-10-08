@@ -24,12 +24,13 @@ public class PalletService {
                     pallet.setOriginPallet(palletRequest.getOriginPallet());
                     pallet.setDestinationPallet(palletRequest.getDestinationPallet());
                     pallet.setScaleNumber(palletRequest.getScaleNumber());
-                    pallet.setCode(palletResponse.getCode());
-                    pallet.setName(palletResponse.getName());
-                    pallet.setQuantity(palletResponse.getQuantity());
-                    pallet.setSerialNumber(palletResponse.getSerialNumber());
+                    pallet.setCode(palletResponse.getData().getCode());
+                    pallet.setName(palletResponse.getData().getName());
+                    pallet.setQuantity(palletResponse.getData().getQuantity());
+                    pallet.setSerialNumber(palletResponse.getData().getSerialNumber());
                     pallet.setClosed(false);
                     pallet.setTotalNet("0");
+                    pallet.setApiNet(palletResponse.getData().getApiNet());
                     palletDao.insertPallet(pallet);
                 });
     }

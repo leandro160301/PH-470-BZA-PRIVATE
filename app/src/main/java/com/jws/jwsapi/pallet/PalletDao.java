@@ -46,4 +46,6 @@ public interface PalletDao {
     @Query("UPDATE pallet SET total_net = total_net + :additionalNet WHERE id = :id")
     void updatePalletTotalNet(int id, String additionalNet);
 
+    @Query("UPDATE pallet SET serial_number = :serialNumber WHERE id = :id")
+    void updatePalletSerialNumber(int id, String serialNumber);
 }

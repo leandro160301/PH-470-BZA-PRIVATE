@@ -6,7 +6,7 @@ public class PalletRequest {
     @SerializedName("balanza")
     private int scaleNumber;
 
-    @SerializedName("palletDestino")
+    @SerializedName("palletResultante")
     private String destinationPallet;
 
     @SerializedName("palletOrigen")

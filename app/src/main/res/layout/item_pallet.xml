@@ -186,7 +186,20 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvState"
+                    android:layout_width="113dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="13dp"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:text="N° SERIE"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/negro"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvSerialNumber"
                     android:layout_width="56dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

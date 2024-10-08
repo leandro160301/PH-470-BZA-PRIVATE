@@ -58,7 +58,6 @@ public class HomeFragment extends Fragment implements WeightConformationListener
     private PalletViewModel palletViewModel;
     private int buttons = OPERATION_BUTTONS;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         buttonProvider = ContainerButtonProviderSingleton.getInstance().getButtonProvider();
@@ -110,6 +109,7 @@ public class HomeFragment extends Fragment implements WeightConformationListener
             binding.tvTotalNetUnit.setText(unit);
             binding.tvGrossUnit.setText(unit);
             binding.tvNetUnit.setText(unit);
+            binding.tvNetApiUnit.setText(unit);
         });
 
         handleObservePallet();
@@ -234,6 +234,7 @@ public class HomeFragment extends Fragment implements WeightConformationListener
         binding.tvPalletDestination.setText(pallet != null ? pallet.getDestinationPallet() : "");
         binding.tvScale.setText(pallet != null ? String.valueOf(pallet.getScaleNumber()) : "");
         binding.tvTotalNet.setText(pallet != null ? pallet.getTotalNet() : "");
+        binding.tvNetApi.setText(pallet != null ? pallet.getApiNet() : "");
     }
 
     private void closePallet() {

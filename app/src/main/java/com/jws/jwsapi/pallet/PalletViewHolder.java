@@ -22,13 +22,13 @@ public class PalletViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Pallet pallet) {
-        binding.tvState.setText(pallet.isClosed() ? "PALLET CERRADO" : "PALLET ABIERTO");
         binding.lnDelete.setVisibility(View.VISIBLE);
         binding.lnSelect.setVisibility(View.VISIBLE);
         binding.lnClose.setVisibility(View.VISIBLE);
         binding.tvPalletTotal.setVisibility(View.GONE);
         binding.tvPalletTotalHeader.setVisibility(View.GONE);
 
+        binding.tvSerialNumber.setText(pallet.getSerialNumber());
         binding.tvPalletCode.setText(pallet.getCode());
         binding.tvPalletName.setText(pallet.getName());
         binding.tvOrigin.setText(pallet.getOriginPallet());

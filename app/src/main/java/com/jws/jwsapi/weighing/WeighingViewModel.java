@@ -1,5 +1,7 @@
 package com.jws.jwsapi.weighing;
 
+import static com.jws.jwsapi.pallet.PalletSerialNumber.incrementSerialNumber;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -80,8 +82,8 @@ public class WeighingViewModel extends ViewModel {
             weighing.setIdPallet(pallet.getId());
             weighing.setScaleNumber(pallet.getScaleNumber());
             weighing.setQuantity(pallet.getQuantity());
-            weighing.setSerialNumber(pallet.getSerialNumber());
-            WeighingRequest weighingRequest = new WeighingRequest(weighing.getSerialNumber(), weighing.getCode(), weighing.getName(), weighing.getNet(), weighing.getGross(), weighing.getTare());
+            weighing.setSerialNumber(incrementSerialNumber(pallet.getSerialNumber()));
+            WeighingRequest weighingRequest = new WeighingRequest(incrementSerialNumber(pallet.getSerialNumber()), weighing.getCode(), weighing.getName(), weighing.getNet(), weighing.getGross(), weighing.getTare());
             createWeighingRequest(weighingRequest, weighing);
         } else {
             error.setValue("Error de pallet");
