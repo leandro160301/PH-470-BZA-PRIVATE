@@ -10,20 +10,20 @@ public class PalletResponse {
     @SerializedName("data")
     private PalletResponseData data;
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
+    public PalletResponseData getData() {
+        return data;
     }
 
     public void setData(PalletResponseData data) {
         this.data = data;
     }
 
-    public PalletResponseData getData() {
-        return data;
-    }
-
     public Boolean getSuccess() {
         return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
 }

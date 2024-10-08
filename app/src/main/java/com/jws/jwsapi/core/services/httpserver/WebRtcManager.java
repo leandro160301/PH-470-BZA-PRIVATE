@@ -36,7 +36,6 @@ import org.webrtc.VideoSource;
 import org.webrtc.VideoTrack;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,23 +54,22 @@ public class WebRtcManager {
     private static final int FRAMES_PER_SECOND = 3;
     private static final String SDP_PARAM = "sdp";
     private static final String ICE_PARAM = "ice";
+    private final MainActivity mainActivity;
+    private final HttpServer server;
+    private final Display display;
+    private final PreferencesManager preferencesManager;
     RtpSender rtpsender;
     RtpParameters rtpParameters;
     List<PeerConnection.IceServer> peerIceServers = new ArrayList<>();
-    private final MainActivity mainActivity;
     private VideoCapturer videoCapturer;
     private EglBase rootEglBase;
     private PeerConnectionFactory peerConnectionFactory;
     private VideoTrack localVideoTrack;
     private PeerConnection localPeer = null;
     private MediaConstraints sdpConstraints;
-    private final HttpServer server;
     private List<IceServer> iceServers = null;
-
-    private final Display display;
     private DisplayMetrics screenMetrics = new DisplayMetrics();
     private Thread rotationDetectorThread = null;
-    private final PreferencesManager preferencesManager;
 
     public WebRtcManager(Intent intent, Context context, HttpServer server, MainActivity activity, PreferencesManager preferencesManagerBase) {
         this.server = server;
