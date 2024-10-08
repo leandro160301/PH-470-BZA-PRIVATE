@@ -11,7 +11,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-
 import com.jws.jwsapi.MainActivity;
 import com.jws.jwsapi.core.data.local.PreferencesManager;
 
@@ -38,6 +37,7 @@ import org.webrtc.VideoTrack;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,38 +50,35 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WebRtcManager {
 
     private static final String TAG = WebRtcManager.class.getSimpleName();
-    RtpSender rtpsender;
-    RtpParameters rtpParameters;
     private static final boolean ENABLE_INTEL_VP8_ENCODER = false;
     private static final boolean ENABLE_H264_HIGH_PROFILE = false;
     private static final int FRAMES_PER_SECOND = 3;
     private static final String SDP_PARAM = "sdp";
     private static final String ICE_PARAM = "ice";
-    private MainActivity mainActivity;
+    RtpSender rtpsender;
+    RtpParameters rtpParameters;
+    List<PeerConnection.IceServer> peerIceServers = new ArrayList<>();
+    private final MainActivity mainActivity;
     private VideoCapturer videoCapturer;
     private EglBase rootEglBase;
     private PeerConnectionFactory peerConnectionFactory;
-
     private VideoTrack localVideoTrack;
-
     private PeerConnection localPeer = null;
     private MediaConstraints sdpConstraints;
-    private HttpServer server;
-
-    List<PeerConnection.IceServer> peerIceServers = new ArrayList<>();
+    private final HttpServer server;
     private List<IceServer> iceServers = null;
 
-    private Display display;
+    private final Display display;
     private DisplayMetrics screenMetrics = new DisplayMetrics();
     private Thread rotationDetectorThread = null;
-    private PreferencesManager preferencesManager;
+    private final PreferencesManager preferencesManager;
 
     public WebRtcManager(Intent intent, Context context, HttpServer server, MainActivity activity, PreferencesManager preferencesManagerBase) {
         this.server = server;
         this.preferencesManager = preferencesManagerBase;
         //XXX getIceServers();
-        this.mainActivity=activity;
-        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        this.mainActivity = activity;
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         display = wm.getDefaultDisplay();
         createMediaProjection(intent);
         initWebRTC(context);
@@ -153,10 +150,10 @@ public class WebRtcManager {
         display.getRealMetrics(screenMetrics);
         if (videoCapturer != null) {
 
-            if(preferencesManager.getRemoteFix()){
+            if (preferencesManager.getRemoteFix()) {
                 videoCapturer.startCapture((screenMetrics.widthPixels), (screenMetrics.heightPixels),
                         FRAMES_PER_SECOND);
-            }else{
+            } else {
                 videoCapturer.startCapture((screenMetrics.heightPixels), (screenMetrics.widthPixels),
                         FRAMES_PER_SECOND);
             }
@@ -252,7 +249,6 @@ public class WebRtcManager {
             Log.d(TAG, "Send ICE candidates: " + messageJsonStr);
         } catch (Exception e) {
             e.printStackTrace();
-            return;
         }
     }
 
@@ -312,7 +308,7 @@ public class WebRtcManager {
             return;
         }
 
-        Log.d(TAG, "Remote SDP received: " + json.toString());
+        Log.d(TAG, "Remote SDP received: " + json);
 
         try {
             localPeer.setRemoteDescription(new CustomSdpObserver("localSetRemote"),
@@ -332,7 +328,7 @@ public class WebRtcManager {
             return;
         }
 
-        Log.d(TAG, "ICE candidate received: " + json.toString());
+        Log.d(TAG, "ICE candidate received: " + json);
 
         try {
             localPeer.addIceCandidate(new IceCandidate(json.getString("id"), json.getInt("label"),
@@ -343,7 +339,8 @@ public class WebRtcManager {
     }
 
     private VideoCapturer createCameraCapturer(CameraEnumerator enumerator) {
-        Log.d(TAG, new Object(){}.getClass().getEnclosingMethod().getName());
+        Log.d(TAG, new Object() {
+        }.getClass().getEnclosingMethod().getName());
         final String[] deviceNames = enumerator.getDeviceNames();
 
         // First, try to find front facing camera
@@ -381,12 +378,7 @@ public class WebRtcManager {
         Log.d(TAG, "getIceServers");
 
         byte[] data = new byte[0];
-        try {
-            data = ("<xirsys_ident>:<xirsys_secret>").getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return;
-        }
+        data = ("<xirsys_ident>:<xirsys_secret>").getBytes(StandardCharsets.UTF_8);
         Log.d(TAG, "getIceServers2");
 
         String authToken = "Basic " + Base64.encodeToString(data, Base64.NO_WRAP);

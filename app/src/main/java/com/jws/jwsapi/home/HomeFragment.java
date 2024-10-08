@@ -16,8 +16,6 @@ import com.jws.jwsapi.MainActivity;
 import com.jws.jwsapi.R;
 import com.jws.jwsapi.core.container.ContainerButtonProvider;
 import com.jws.jwsapi.core.container.ContainerButtonProviderSingleton;
-import com.jws.jwsapi.core.gpio.GpioHighListener;
-import com.jws.jwsapi.core.gpio.GpioManager;
 import com.jws.jwsapi.databinding.HomeFragmentBinding;
 import com.jws.jwsapi.pallet.Pallet;
 import com.jws.jwsapi.pallet.PalletCreateFragment;
@@ -38,7 +36,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class HomeFragment extends Fragment implements WeightConformationListener{
+public class HomeFragment extends Fragment implements WeightConformationListener {
 
     private static final int OPERATION_BUTTONS = 0;
     private static final int SCALE_BUTTONS = 1;

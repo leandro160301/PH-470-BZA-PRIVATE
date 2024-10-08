@@ -82,6 +82,29 @@ public class InitServer {
                 101);
     }
 
+    public void handleActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 101: // PERM_MEDIA_PROJECTION_SERVICE
+                if (resultCode == Activity.RESULT_OK) {
+                    Runnable myRunnable = () -> {
+                        if (appService != null) {
+                            if (!appService.serverStart(data, 8001,
+                                    isAccessibilityServiceEnabled(), context, mainActivity,
+                                    userManager, preferencesManagerBase,
+                                    weighingService, palletService)) {
+                            }
+                        }
+                    };
+                    Thread myThread = new Thread(myRunnable);
+                    myThread.start();
+                }
+                break;
+            case 102: // PERM_ACTION_ACCESSIBILITY_SERVICE
+                if (isAccessibilityServiceEnabled())
+                    enableAccessibilityService();
+                break;
+        }
+    }
 
     private class AppServiceConnection implements ServiceConnection {
         @Override
@@ -104,8 +127,8 @@ public class InitServer {
 
         @Override
         public void onAccessNetworkStatePermissionGranted(boolean isGranted) {
-            if (!isGranted)
-                return;
+            if (!isGranted) {
+            }
         }
 
         @Override
@@ -136,30 +159,6 @@ public class InitServer {
 
         @Override
         public void onCameraPermissionGranted(boolean isGranted) {
-        }
-    }
-
-    public void handleActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 101: // PERM_MEDIA_PROJECTION_SERVICE
-                if (resultCode == Activity.RESULT_OK) {
-                    Runnable myRunnable = () -> {
-                        if (appService != null) {
-                            if (!appService.serverStart(data, 8001,
-                                    isAccessibilityServiceEnabled(), context, mainActivity,
-                                    userManager, preferencesManagerBase,
-                                    weighingService, palletService)) {
-                            }
-                        }
-                    };
-                    Thread myThread = new Thread(myRunnable);
-                    myThread.start();
-                }
-                break;
-            case 102: // PERM_ACTION_ACCESSIBILITY_SERVICE
-                if (isAccessibilityServiceEnabled())
-                    enableAccessibilityService();
-                break;
         }
     }
 

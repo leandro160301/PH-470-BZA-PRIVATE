@@ -19,19 +19,20 @@ public class PalletService {
     public Single<PalletResponse> createPallet(PalletRequest palletRequest) {
         return palletApi.postNewPallet(palletRequest)
                 .doOnSuccess(palletResponse -> {
-
-                    Pallet pallet = new Pallet();
-                    pallet.setOriginPallet(palletRequest.getOriginPallet());
-                    pallet.setDestinationPallet(palletRequest.getDestinationPallet());
-                    pallet.setScaleNumber(palletRequest.getScaleNumber());
-                    pallet.setCode(palletResponse.getData().getCode());
-                    pallet.setName(palletResponse.getData().getName());
-                    pallet.setQuantity(palletResponse.getData().getQuantity());
-                    pallet.setSerialNumber(palletResponse.getData().getSerialNumber());
-                    pallet.setClosed(false);
-                    pallet.setTotalNet("0");
-                    pallet.setApiNet(palletResponse.getData().getApiNet());
-                    palletDao.insertPallet(pallet);
+                    if (palletResponse.getSuccess()) {
+                        Pallet pallet = new Pallet();
+                        pallet.setOriginPallet(palletRequest.getOriginPallet());
+                        pallet.setDestinationPallet(palletRequest.getDestinationPallet());
+                        pallet.setScaleNumber(palletRequest.getScaleNumber());
+                        pallet.setCode(palletResponse.getData().getCode());
+                        pallet.setName(palletResponse.getData().getName());
+                        pallet.setQuantity(palletResponse.getData().getQuantity());
+                        pallet.setSerialNumber(palletResponse.getData().getSerialNumber());
+                        pallet.setClosed(false);
+                        pallet.setTotalNet("0");
+                        pallet.setApiNet(palletResponse.getData().getApiNet());
+                        palletDao.insertPallet(pallet);
+                    }
                 });
     }
 
