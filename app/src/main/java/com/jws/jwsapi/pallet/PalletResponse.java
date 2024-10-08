@@ -8,17 +8,17 @@ public class PalletResponse {
     private Boolean success;
 
     @SerializedName("data")
-    private PalletData data;
+    private PalletResponseData data;
 
     public void setSuccess(Boolean success) {
         this.success = success;
     }
 
-    public void setData(PalletData data) {
+    public void setData(PalletResponseData data) {
         this.data = data;
     }
 
-    public PalletData getData() {
+    public PalletResponseData getData() {
         return data;
     }
 

@@ -2,7 +2,7 @@ package com.jws.jwsapi.pallet;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PalletData {
+public class PalletResponseData {
 
     @SerializedName("codigo")
     private String code;
