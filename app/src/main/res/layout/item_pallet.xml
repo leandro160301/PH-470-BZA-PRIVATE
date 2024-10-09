@@ -114,7 +114,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="ACUMULADO"
+                        android:text="TOTAL/TEORICO"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/negro"
                         android:textSize="24sp"
