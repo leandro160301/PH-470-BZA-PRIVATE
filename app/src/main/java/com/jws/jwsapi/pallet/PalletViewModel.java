@@ -17,6 +17,7 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 @HiltViewModel
@@ -84,7 +85,7 @@ public class PalletViewModel extends ViewModel {
 
     public void createPallet() {
         if (isValidPallet()) {
-            PalletRequest palletRequest = new PalletRequest(scale.getValue(),
+            PalletRequest palletRequest = new PalletRequest("c16c9ac1deca7c4db51e8c73800d4ced",
                     palletDestination.getValue(),
                     palletOrigin.getValue());
             createPalletRequest(palletRequest);

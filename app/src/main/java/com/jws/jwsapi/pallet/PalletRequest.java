@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class PalletRequest {
     @SerializedName("balanza")
-    private int scaleNumber;
+    private String scaleNumber;
 
     @SerializedName("palletResultante")
     private String destinationPallet;
@@ -12,17 +12,17 @@ public class PalletRequest {
     @SerializedName("palletOrigen")
     private String originPallet;
 
-    public PalletRequest(int scaleNumber, String destinationPallet, String originPallet) {
+    public PalletRequest(String scaleNumber, String destinationPallet, String originPallet) {
         this.scaleNumber = scaleNumber;
         this.destinationPallet = destinationPallet;
         this.originPallet = originPallet;
     }
 
-    public int getScaleNumber() {
+    public String getScaleNumber() {
         return scaleNumber;
     }
 
-    public void setScaleNumber(int scaleNumber) {
+    public void setScaleNumber(String scaleNumber) {
         this.scaleNumber = scaleNumber;
     }
 

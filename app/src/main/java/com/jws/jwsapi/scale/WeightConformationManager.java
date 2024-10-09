@@ -19,7 +19,7 @@ public class WeightConformationManager {
     }
 
     void evaluateWeightConformation(boolean stable) {
-        double grossWeight = weighRepository.getGross();
+        double grossWeight = weighRepository.getNet();
         double zeroBand = weightPreferences.getZeroBand();
         int stableCountThreshold = weightPreferences.getStableCountThreshold();
 

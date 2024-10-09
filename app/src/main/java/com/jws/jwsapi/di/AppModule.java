@@ -41,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppModule {
 
     private static final String DATABASE_NAME = "bza-database";
-    private static final String BASE_URL = "http://10.41.0.78:8080/";
+    private static final String BASE_URL = "https://blancaluna.applog.com.ar/";
     private static final String PREFS_NAME = "bza_pref";
 
     @Provides

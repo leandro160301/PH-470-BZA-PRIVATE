@@ -9,7 +9,7 @@ public class WeightPreferences {
     private static final String PREF_STABLE_COUNT_THRESHOLD = "stable_count_threshold";
     private static final String PREF_ZERO_BAND = "zero_band";
     private static final int DEFAULT_STABLE_COUNT_THRESHOLD = 15;
-    private static final double DEFAULT_ZERO_BAND = 49.0;
+    private static final double DEFAULT_ZERO_BAND = 0.5;
 
     private final PreferencesHelper preferencesHelper;
 

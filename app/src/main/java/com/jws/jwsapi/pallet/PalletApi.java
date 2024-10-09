@@ -6,7 +6,7 @@ import retrofit2.http.POST;
 
 public interface PalletApi {
 
-    @POST("/iniciarpesada")
+    @POST("/testing/apiBalanza/iniciarpesada")
     Single<PalletResponse> postNewPallet(@Body PalletRequest palletRequest);
 
     @POST("/CerrarPallet")

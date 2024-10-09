@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import io.reactivex.Single;
+import retrofit2.HttpException;
+import retrofit2.Response;
 
 public class PalletService {
 
@@ -19,11 +21,12 @@ public class PalletService {
     public Single<PalletResponse> createPallet(PalletRequest palletRequest) {
         return palletApi.postNewPallet(palletRequest)
                 .doOnSuccess(palletResponse -> {
+                    System.out.println("Respuesta del servidor: " + palletResponse.toString());
                     if (palletResponse.getSuccess()) {
                         Pallet pallet = new Pallet();
                         pallet.setOriginPallet(palletRequest.getOriginPallet());
                         pallet.setDestinationPallet(palletRequest.getDestinationPallet());
-                        pallet.setScaleNumber(palletRequest.getScaleNumber());
+                        pallet.setScaleNumber(1);
                         pallet.setCode(palletResponse.getData().getCode());
                         pallet.setName(palletResponse.getData().getName());
                         pallet.setQuantity(palletResponse.getData().getQuantity());

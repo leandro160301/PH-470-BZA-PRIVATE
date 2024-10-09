@@ -72,6 +72,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
+                        android:maxLength="26"
                         android:padding="5dp"
                         android:text="ACIDO TARTARICO POLVO X 25KG"
                         android:textColor="@color/negro"
