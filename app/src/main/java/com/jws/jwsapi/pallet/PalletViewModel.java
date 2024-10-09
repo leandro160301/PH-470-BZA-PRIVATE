@@ -96,7 +96,7 @@ public class PalletViewModel extends ViewModel {
 
     public void createPallet() {
         if (isValidPallet()) {
-            PalletRequest palletRequest = new PalletRequest("c16c9ac1deca7c4db51e8c73800d4ced",
+            PalletRequest palletRequest = new PalletRequest(apiPreferences.getScaleCode(),
                     palletDestination.getValue(),
                     palletOrigin.getValue());
             createPalletRequest(palletRequest);
@@ -143,19 +143,16 @@ public class PalletViewModel extends ViewModel {
         compositeDisposable.add(disposable);
     }
 
-    public void closePallet() {
-        Pallet pallet = palletRepository.getCurrentPallet().getValue();
-        if (pallet != null) {
-            handlePalletRequest(palletService.closePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), pallet.getId()));
-        }
+    public void closePallet(Pallet pallet) {
+        handlePalletRequest(palletService.closePallet(new PalletCloseRequest(apiPreferences.getScaleCode(),
+                pallet.getOriginPallet()), pallet.getId()));
 
     }
 
-    public void deletePallet() {
-        Pallet pallet = palletRepository.getCurrentPallet().getValue();
-        if (pallet != null) {
-            handlePalletRequest(palletService.deletePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), pallet.getId()));
-        }
+    public void deletePallet(Pallet pallet) {
+        handlePalletRequest(palletService.deletePallet(new PalletCloseRequest(apiPreferences.getScaleCode(),
+                pallet.getOriginPallet()), pallet.getId()));
+
     }
 
     private void handlePalletRequest(Single<PalletCloseResponse> request) {
@@ -166,7 +163,21 @@ public class PalletViewModel extends ViewModel {
                 .doFinally(() -> loading.setValue(false))
                 .subscribe(
                         palletCloseResponse::setValue,
-                        throwable -> error.setValue(throwable.getMessage())
+                        throwable -> {
+                            if (throwable instanceof HttpException) {
+                                ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
+                                try {
+                                    String errorBody = responseBody.string();
+                                    JSONObject jsonObject = new JSONObject(errorBody);
+                                    String errorMessage = jsonObject.optString("message", "Error desconocido");
+                                    error.setValue(errorMessage);
+                                } catch (Exception e) {
+                                    error.setValue("Error al leer el mensaje de error");
+                                }
+                            } else {
+                                error.setValue("Error inesperado: " + throwable.getMessage());
+                            }
+                        }
                 );
 
         compositeDisposable.add(disposable);

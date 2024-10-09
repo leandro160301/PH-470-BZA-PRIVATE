@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
         palletViewModel.getPalletCloseResponse().observe(getViewLifecycleOwner(), palletCloseResponse -> {
             if (palletCloseResponse == null) return;
             int toastLayout = palletCloseResponse.getStatus() ? R.layout.item_customtoastok : R.layout.item_customtoasterror;
-            String message = palletCloseResponse.getStatus() ? requireContext().getString(R.string.toast_message_pallet_closed) : palletCloseResponse.getError();
+            String message = palletCloseResponse.getStatus() ? requireContext().getString(R.string.toast_message_pallet_closed) : palletCloseResponse.getMessage();
             showMessage(message, toastLayout);
         });
 
@@ -238,7 +238,7 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     private void closePallet() {
         Pallet currentPallet = palletRepository.getCurrentPallet().getValue();
         if (currentPallet != null) {
-            palletViewModel.closePallet();
+            palletViewModel.closePallet(currentPallet);
         } else {
             messageError(getString(R.string.toast_error_close_pallet));
         }

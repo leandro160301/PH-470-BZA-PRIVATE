@@ -7,8 +7,8 @@ public class PalletCloseResponse {
     @SerializedName("success")
     private Boolean status;
 
-    @SerializedName("error")
-    private String error;
+    @SerializedName("message")
+    private String message;
 
     public Boolean getStatus() {
         return status;
@@ -18,12 +18,12 @@ public class PalletCloseResponse {
         this.status = status;
     }
 
-    public String getError() {
-        return error;
+    public String getMessage() {
+        return message;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }

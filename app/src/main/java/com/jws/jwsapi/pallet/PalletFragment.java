@@ -70,7 +70,7 @@ public class PalletFragment extends Fragment implements PalletButtonClickListene
         palletViewModel.getPalletCloseResponse().observe(getViewLifecycleOwner(), palletCloseResponse -> {
             if (palletCloseResponse == null) return;
             int toastLayout = palletCloseResponse.getStatus() ? R.layout.item_customtoastok : R.layout.item_customtoasterror;
-            String message = palletCloseResponse.getStatus() ? requireContext().getString(R.string.toast_message_pallet_closed) : palletCloseResponse.getError();
+            String message = palletCloseResponse.getStatus() ? requireContext().getString(R.string.toast_message_pallet_closed) : palletCloseResponse.getMessage();
             ToastHelper.message(message, toastLayout, getContext());
         });
 
@@ -158,7 +158,7 @@ public class PalletFragment extends Fragment implements PalletButtonClickListene
     @Override
     public void deletePallet(Pallet pallet) {
         dialogText(getContext(), requireContext().getString(R.string.dialog_delete_pallet), requireContext().getString(R.string.dialog_button_delete_pallet), ()
-                -> palletViewModel.deletePallet());
+                -> palletViewModel.deletePallet(pallet));
     }
 
     @Override
@@ -170,7 +170,7 @@ public class PalletFragment extends Fragment implements PalletButtonClickListene
     @Override
     public void closePallet(Pallet pallet) {
         dialogText(getContext(), requireContext().getString(R.string.dialog_close_pallet), requireContext().getString(R.string.dialog_button_close_pallet), ()
-                -> palletViewModel.closePallet());
+                -> palletViewModel.closePallet(pallet));
     }
 
 }
