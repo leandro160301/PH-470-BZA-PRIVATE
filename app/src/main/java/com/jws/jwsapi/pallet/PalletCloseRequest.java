@@ -4,18 +4,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class PalletCloseRequest {
 
-    @SerializedName("numeroSerie")
-    private String serialNumber;
+    @SerializedName("balanza")
+    private String scaleNumber;
 
-    public PalletCloseRequest(String serialNumber) {
-        this.serialNumber = serialNumber;
+    @SerializedName("palletOrigen")
+    private String originPallet;
+
+    public PalletCloseRequest(String scaleNumber, String originPallet) {
+        this.scaleNumber = scaleNumber;
+        this.originPallet = originPallet;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public String getScaleNumber() {
+        return scaleNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setScaleNumber(String scaleNumber) {
+        this.scaleNumber = scaleNumber;
+    }
+
+    public String getOriginPallet() {
+        return originPallet;
+    }
+
+    public void setOriginPallet(String originPallet) {
+        this.originPallet = originPallet;
     }
 }

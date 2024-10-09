@@ -9,7 +9,7 @@ public interface PalletApi {
     @POST("/testing/apiBalanza/iniciarpesada")
     Single<PalletResponse> postNewPallet(@Body PalletRequest palletRequest);
 
-    @POST("/CerrarPallet")
+    @POST("/testing/apiBalanza/cerrarpesada")
     Single<PalletCloseResponse> closePallet(@Body PalletCloseRequest palletCloseRequest);
 
 }

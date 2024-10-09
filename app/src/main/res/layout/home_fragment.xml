@@ -402,6 +402,7 @@
                                             android:background="@drawable/campollenarclickeableceropadding_selector"
                                             android:gravity="center"
                                             android:textAlignment="center"
+                                            android:padding="20dp"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                             android:textColor="#000000"
                                             android:textSize="47sp" />

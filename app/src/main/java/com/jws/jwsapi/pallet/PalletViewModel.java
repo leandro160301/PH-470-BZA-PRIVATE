@@ -17,7 +17,6 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 @HiltViewModel
@@ -116,11 +115,18 @@ public class PalletViewModel extends ViewModel {
     }
 
     public void closePallet(String serialNumber) {
-        handlePalletRequest(palletService.closePallet(new PalletCloseRequest(serialNumber)));
+        Pallet pallet = palletRepository.getCurrentPallet().getValue();
+        if (pallet != null) {
+            handlePalletRequest(palletService.closePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), serialNumber));
+        }
+
     }
 
     public void deletePallet(String serialNumber) {
-        handlePalletRequest(palletService.deletePallet(new PalletCloseRequest(serialNumber)));
+        Pallet pallet = palletRepository.getCurrentPallet().getValue();
+        if (pallet != null) {
+            handlePalletRequest(palletService.deletePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), serialNumber));
+        }
     }
 
     private void handlePalletRequest(Single<PalletCloseResponse> request) {

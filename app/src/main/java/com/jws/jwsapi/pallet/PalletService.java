@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import io.reactivex.Single;
-import retrofit2.HttpException;
-import retrofit2.Response;
 
 public class PalletService {
 
@@ -38,21 +36,21 @@ public class PalletService {
                 });
     }
 
-    public Single<PalletCloseResponse> closePallet(PalletCloseRequest palletCloseRequest) {
+    public Single<PalletCloseResponse> closePallet(PalletCloseRequest palletCloseRequest, String serialNumber) {
         return palletApi.closePallet(palletCloseRequest)
                 .doOnSuccess(palletCloseResponse -> {
                     if (palletCloseResponse.getStatus()) {
-                        palletDao.updatePalletClosedStatus(palletCloseRequest.getSerialNumber(), true);
+                        palletDao.updatePalletClosedStatus(serialNumber, true);
                     }
 
                 });
     }
 
-    public Single<PalletCloseResponse> deletePallet(PalletCloseRequest palletCloseRequest) {
+    public Single<PalletCloseResponse> deletePallet(PalletCloseRequest palletCloseRequest, String serialNumber) {
         return palletApi.closePallet(palletCloseRequest)
                 .doOnSuccess(palletCloseResponse -> {
                     if (palletCloseResponse.getStatus()) {
-                        palletDao.deletePalletBySerialNumber(palletCloseRequest.getSerialNumber());
+                        palletDao.deletePalletBySerialNumber(serialNumber);
                     }
                 });
     }

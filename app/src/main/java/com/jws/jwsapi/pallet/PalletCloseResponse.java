@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class PalletCloseResponse {
 
-    @SerializedName("status")
+    @SerializedName("success")
     private Boolean status;
 
     @SerializedName("error")
