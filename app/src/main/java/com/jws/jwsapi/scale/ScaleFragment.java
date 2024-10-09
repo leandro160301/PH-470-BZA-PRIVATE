@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.jws.jwsapi.MainActivity;
@@ -34,6 +35,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class ScaleFragment extends Fragment {
     @Inject
     WeightPreferences weightPreferences;
+    @Inject
+    WeighRepository weighRepository;
     MainActivity mainActivity;
     private FragmentScaleBinding binding;
     private ButtonProvider buttonProvider;
@@ -55,6 +58,12 @@ public class ScaleFragment extends Fragment {
         binding.tvZeroBand.setText(String.valueOf(weightPreferences.getZeroBand()));
 
         binding.tvStableCount.setText(String.valueOf(weightPreferences.getStableCountThreshold()));
+
+        weighRepository.getUnit().observe(getViewLifecycleOwner(), unit -> {
+            if (unit != null) {
+                binding.tvUnit.setText(unit);
+            }
+        });
 
         setOnClickListeners();
 
