@@ -116,8 +116,8 @@ public class PalletViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> loading.setValue(false))
                 .subscribe(
-                        palletResponse1 -> {
-                            palletResponse.setValue(palletResponse1);
+                        palletResponse -> {
+                            this.palletResponse.setValue(palletResponse);
                             clearPalletData();
                         },
                         throwable -> {
