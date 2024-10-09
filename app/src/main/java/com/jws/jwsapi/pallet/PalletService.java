@@ -50,7 +50,7 @@ public class PalletService {
         return palletApi.closePallet(palletCloseRequest)
                 .doOnSuccess(palletCloseResponse -> {
                     if (palletCloseResponse.getStatus()) {
-                        palletDao.deletePalletBySerialNumber(id);
+                        palletDao.deletePallet(id);
                     }
                 });
     }

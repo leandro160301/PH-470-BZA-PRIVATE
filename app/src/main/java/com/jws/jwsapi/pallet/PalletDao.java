@@ -26,13 +26,13 @@ public interface PalletDao {
     void deleteAllPallets();
 
     @Query("DELETE FROM pallet WHERE id = :id")
-    void deletePalletBySerialNumber(int id);
+    void deletePallet(int id);
 
     @Insert
     void insertPallet(Pallet pallet);
 
-    @Query("UPDATE pallet SET is_closed = :isClosed WHERE id = :id")
-    void updatePalletClosedStatus(int id, boolean isClosed);
+    @Query("UPDATE pallet SET is_closed = :open WHERE id = :id")
+    void updatePalletClosedStatus(int id, boolean open);
 
     @Query("UPDATE pallet SET done = done + 1 WHERE id = :id")
     void incrementDoneById(int id);

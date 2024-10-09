@@ -2,6 +2,7 @@ package com.jws.jwsapi.weighing;
 
 import androidx.lifecycle.LiveData;
 
+import com.jws.jwsapi.pallet.Pallet;
 import com.jws.jwsapi.pallet.PalletDao;
 
 import java.util.List;
@@ -28,11 +29,14 @@ public class WeighingService {
                         palletDao.incrementDoneById(id);
                         palletDao.updatePalletSerialNumber(id, weighing.getSerialNumber());
                         palletDao.updatePalletTotalNet(id, weighing.getNet());
+                        Pallet pallet =palletDao.getPalletById(id,true).getValue();
+                        if (pallet != null && weighing.getQuantity() == pallet.getDone()) {
+                            palletDao.updatePalletClosedStatus(id,false);
+                        }
                     }
 
                 });
     }
-
 
     public LiveData<List<Weighing>> getAllWeighings() {
         return weighingDao.getAllWeighing();
