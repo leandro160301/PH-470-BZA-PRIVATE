@@ -22,7 +22,7 @@ import com.jws.jwsapi.pallet.PalletCreateFragment;
 import com.jws.jwsapi.pallet.PalletFragment;
 import com.jws.jwsapi.pallet.PalletViewModel;
 import com.jws.jwsapi.scale.ScaleViewModel;
-import com.jws.jwsapi.scale.WeightConformationListener;
+import com.jws.jwsapi.scale.ScaleConformationListener;
 import com.jws.jwsapi.shared.PalletRepository;
 import com.jws.jwsapi.shared.WeighRepository;
 import com.jws.jwsapi.utils.ToastHelper;
@@ -36,7 +36,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class HomeFragment extends Fragment implements WeightConformationListener {
+public class HomeFragment extends Fragment implements ScaleConformationListener {
 
     private static final int OPERATION_BUTTONS = 0;
     private static final int SCALE_BUTTONS = 1;

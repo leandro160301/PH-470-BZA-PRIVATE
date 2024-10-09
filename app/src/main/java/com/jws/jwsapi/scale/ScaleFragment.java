@@ -13,17 +13,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.jws.jwsapi.MainActivity;
 import com.jws.jwsapi.R;
-import com.jws.jwsapi.databinding.FragmentPalletCreateBinding;
 import com.jws.jwsapi.databinding.FragmentScaleBinding;
-import com.jws.jwsapi.dialog.DialogInputInterface;
-import com.jws.jwsapi.pallet.PalletViewModel;
 import com.jws.jwsapi.shared.WeighRepository;
-import com.jws.jwsapi.utils.ToastHelper;
 import com.service.Comunicacion.ButtonProvider;
 import com.service.Comunicacion.ButtonProviderSingleton;
 
@@ -34,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class ScaleFragment extends Fragment {
     @Inject
-    WeightPreferences weightPreferences;
+    ScalePreferences scalePreferences;
     @Inject
     WeighRepository weighRepository;
     MainActivity mainActivity;
@@ -55,9 +49,9 @@ public class ScaleFragment extends Fragment {
         mainActivity = (MainActivity) getActivity();
         setupButtons();
 
-        binding.tvZeroBand.setText(String.valueOf(weightPreferences.getZeroBand()));
+        binding.tvZeroBand.setText(String.valueOf(scalePreferences.getZeroBand()));
 
-        binding.tvStableCount.setText(String.valueOf(weightPreferences.getStableCountThreshold()));
+        binding.tvStableCount.setText(String.valueOf(scalePreferences.getStableCountThreshold()));
 
         weighRepository.getUnit().observe(getViewLifecycleOwner(), unit -> {
             if (unit != null) {
@@ -72,14 +66,14 @@ public class ScaleFragment extends Fragment {
     private void setOnClickListeners() {
         binding.tvZeroBand.setOnClickListener(v -> keyboardFloat(binding.tvZeroBand, getString(R.string.dialog_scale_fragment_zero_band), getContext(), value -> {
             if (isNumeric(value)) {
-                weightPreferences.setZeroBand(Double.parseDouble(value));
+                scalePreferences.setZeroBand(Double.parseDouble(value));
             } else {
                 message("Valor no valido",R.layout.item_customtoasterror,requireContext());
             }
         }));
         binding.tvStableCount.setOnClickListener(v -> keyboardInt(binding.tvStableCount, getString(R.string.dialog_scale_fragment_stable_count), getContext(), value -> {
             if (isNumeric(value)) {
-                weightPreferences.setStableCountThreshold(Integer.parseInt(value));
+                scalePreferences.setStableCountThreshold(Integer.parseInt(value));
             } else {
                 message("Valor no valido",R.layout.item_customtoasterror,requireContext());
             }

@@ -41,7 +41,7 @@ public class WeighingAdapter extends RecyclerView.Adapter<WeighingViewHolder> {
 
     @Override
     public int getItemCount() {
-        return weighingList.size();
+        return Math.min(weighingList.size(), 100);
     }
 
 
