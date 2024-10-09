@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.jws.jwsapi.shared.ApiPreferences;
 import com.jws.jwsapi.shared.PalletRepository;
 
 import org.json.JSONObject;
@@ -38,11 +39,13 @@ public class PalletViewModel extends ViewModel {
     private final MutableLiveData<String> palletOrigin = new MutableLiveData<>();
     private final MutableLiveData<String> palletDestination = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isClosed = new MutableLiveData<>();
+    private final ApiPreferences apiPreferences;
 
     @Inject
-    public PalletViewModel(PalletService palletService, PalletRepository palletRepository) {
+    public PalletViewModel(PalletService palletService, PalletRepository palletRepository, ApiPreferences apiPreferences) {
         this.palletService = palletService;
         this.palletRepository = palletRepository;
+        this.apiPreferences = apiPreferences;
         pallets = Transformations.switchMap(isClosed, active -> {
             if (active != null) {
                 return palletService.getAllPallets(active);

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.jws.jwsapi.pallet.Pallet;
+import com.jws.jwsapi.shared.ApiPreferences;
 import com.jws.jwsapi.shared.PalletRepository;
 import com.jws.jwsapi.shared.UserRepository;
 
@@ -33,12 +34,14 @@ public class WeighingViewModel extends ViewModel {
     private final MutableLiveData<String> error = new MutableLiveData<>();
     private final LiveData<Pallet> currentPallet;
     private final UserRepository userRepository;
+    private final ApiPreferences apiPreferences;
 
     @Inject
-    public WeighingViewModel(PalletRepository repository, WeighingService weighingService, UserRepository userRepository) {
+    public WeighingViewModel(PalletRepository repository, WeighingService weighingService, UserRepository userRepository, ApiPreferences apiPreferences) {
         this.repository = repository;
         this.weighingService = weighingService;
         this.userRepository = userRepository;
+        this.apiPreferences = apiPreferences;
         this.weighings = weighingService.getAllWeighings();
         this.currentPallet = repository.getCurrentPallet();
 
@@ -83,7 +86,7 @@ public class WeighingViewModel extends ViewModel {
             weighing.setScaleNumber(pallet.getScaleNumber());
             weighing.setQuantity(pallet.getQuantity());
             weighing.setSerialNumber(incrementSerialNumber(pallet.getSerialNumber()));
-            WeighingRequest weighingRequest = new WeighingRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet(), incrementSerialNumber(pallet.getSerialNumber()), net, gross);
+            WeighingRequest weighingRequest = new WeighingRequest(apiPreferences.getScaleCode(), pallet.getOriginPallet(), incrementSerialNumber(pallet.getSerialNumber()), net, gross);
             createWeighingRequest(weighingRequest, weighing);
         } else {
             error.setValue("Error de pallet");
