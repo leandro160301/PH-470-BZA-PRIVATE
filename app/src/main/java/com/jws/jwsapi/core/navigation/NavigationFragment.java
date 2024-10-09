@@ -1,10 +1,12 @@
 package com.jws.jwsapi.core.navigation;
 
+import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_BALANZA;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_ENTRADAS;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_ETHERNET;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_ETIQUETAS;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_FECHA_Y_HORA;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_IMPRESORA;
+import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_PROGRAMA;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_TEMA;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_WIFI;
 import static com.jws.jwsapi.core.navigation.NavigationMenu.MENU_COMMUNICATION;
@@ -48,6 +50,7 @@ import com.jws.jwsapi.core.user.UserFragment;
 import com.jws.jwsapi.core.user.UserPinDialog;
 import com.jws.jwsapi.core.user.UserPinInterface;
 import com.jws.jwsapi.databinding.StandarMenuBinding;
+import com.jws.jwsapi.scale.ScaleFragment;
 import com.jws.jwsapi.shared.UserRepository;
 import com.jws.jwsapi.utils.AdapterCommon;
 import com.jws.jwsapi.utils.ThemeDialog;
@@ -236,6 +239,12 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
     }
 
     private void handleSettingsMenu(int position) {
+        if (position == ITEM_PROGRAMA) {
+            handleLabelItem();
+        }
+        if (position == ITEM_BALANZA) {
+            handleUserAction(() -> mainActivity.mainClass.openFragment(new ScaleFragment()),ROLE_OPERATOR);
+        }
         if (position == ITEM_ETIQUETAS) {
             handleLabelItem();
         }

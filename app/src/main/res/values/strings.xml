@@ -347,6 +347,8 @@
     </string-array>
 
     <string-array name="menu_items_settings">
+        <item>Programa</item>
+        <item>Balanza</item>
         <item>Etiquetas</item>
     </string-array>
     <!--menu items feature-->
@@ -454,6 +456,8 @@
     <string name="gpio_fragment_input6">Entrada 6</string>
     <string name="gpio_fragment_input7">Entrada 7</string>
     <string name="gpio_fragment_input8">Entrada 8</string>
+    <string name="dialog_scale_fragment_zero_band">Ingrese la banda de cero</string>
+    <string name="dialog_scale_fragment_stable_count">Ingrese las cuentas estable</string>
 
 
 </resources>

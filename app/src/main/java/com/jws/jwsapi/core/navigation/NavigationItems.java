@@ -15,5 +15,7 @@ public class NavigationItems {
     public static final int ITEM_TEMA = 1;
 
     // Settings
-    public static final int ITEM_ETIQUETAS = 0;
+    public static final int ITEM_PROGRAMA = 0;
+    public static final int ITEM_BALANZA = 1;
+    public static final int ITEM_ETIQUETAS = 2;
 }
