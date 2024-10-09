@@ -1,5 +1,7 @@
 package com.jws.jwsapi.home;
 
+import static com.jws.jwsapi.dialog.DialogUtil.dialogText;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.jws.jwsapi.R;
 import com.jws.jwsapi.core.container.ContainerButtonProvider;
 import com.jws.jwsapi.core.container.ContainerButtonProviderSingleton;
 import com.jws.jwsapi.databinding.HomeFragmentBinding;
+import com.jws.jwsapi.dialog.DialogButtonInterface;
 import com.jws.jwsapi.pallet.Pallet;
 import com.jws.jwsapi.pallet.PalletCreateFragment;
 import com.jws.jwsapi.pallet.PalletFragment;
@@ -236,12 +239,15 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     }
 
     private void closePallet() {
-        Pallet currentPallet = palletRepository.getCurrentPallet().getValue();
-        if (currentPallet != null) {
-            palletViewModel.closePallet(currentPallet);
-        } else {
-            messageError(getString(R.string.toast_error_close_pallet));
-        }
+        dialogText(getContext(), requireContext().getString(R.string.dialog_close_pallet), requireContext().getString(R.string.dialog_button_close_pallet), () -> {
+            Pallet currentPallet = palletRepository.getCurrentPallet().getValue();
+            if (currentPallet != null) {
+                palletViewModel.closePallet(currentPallet);
+            } else {
+                messageError(getString(R.string.toast_error_close_pallet));
+            }
+        });
+
 
     }
 
