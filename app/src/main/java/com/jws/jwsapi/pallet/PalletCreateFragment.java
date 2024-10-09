@@ -1,6 +1,6 @@
 package com.jws.jwsapi.pallet;
 
-import static com.jws.jwsapi.dialog.DialogUtil.keyboard;
+import static com.jws.jwsapi.dialog.DialogUtil.keyboardInt;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -67,8 +67,8 @@ public class PalletCreateFragment extends Fragment {
     }
 
     private void setOnClickListeners() {
-        binding.tvPalletOrigin.setOnClickListener(v -> keyboard(binding.tvPalletOrigin, requireContext().getString(R.string.dialog_palleto_input), getContext(), texto -> palletViewModel.setPalletOrigin(texto)));
-        binding.tvPalletDestination.setOnClickListener(v -> keyboard(binding.tvPalletDestination, requireContext().getString(R.string.dialog_palletd_input), getContext(), texto -> palletViewModel.setPalletDestination(texto)));
+        binding.tvPalletOrigin.setOnClickListener(v -> keyboardInt(binding.tvPalletOrigin, requireContext().getString(R.string.dialog_palleto_input), getContext(), texto -> palletViewModel.setPalletOrigin(texto)));
+        binding.tvPalletDestination.setOnClickListener(v -> keyboardInt(binding.tvPalletDestination, requireContext().getString(R.string.dialog_palletd_input), getContext(), texto -> palletViewModel.setPalletDestination(texto)));
         binding.btNewPaller.setOnClickListener(v -> palletViewModel.createPallet());
     }
 

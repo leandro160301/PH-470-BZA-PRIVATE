@@ -83,7 +83,7 @@ public class WeighingViewModel extends ViewModel {
             weighing.setScaleNumber(pallet.getScaleNumber());
             weighing.setQuantity(pallet.getQuantity());
             weighing.setSerialNumber(incrementSerialNumber(pallet.getSerialNumber()));
-            WeighingRequest weighingRequest = new WeighingRequest(incrementSerialNumber(pallet.getSerialNumber()), weighing.getCode(), weighing.getName(), weighing.getNet(), weighing.getGross(), weighing.getTare());
+            WeighingRequest weighingRequest = new WeighingRequest("1", pallet.getOriginPallet(), incrementSerialNumber(pallet.getSerialNumber()), net, gross);
             createWeighingRequest(weighingRequest, weighing);
         } else {
             error.setValue("Error de pallet");

@@ -6,6 +6,6 @@ import retrofit2.http.POST;
 
 public interface WeighingApi {
 
-    @POST("/NuevaPesada")
+    @POST("/recibirpesada")
     Single<WeighingResponse> postNewWeighing(@Body WeighingRequest weighingRequest);
 }
