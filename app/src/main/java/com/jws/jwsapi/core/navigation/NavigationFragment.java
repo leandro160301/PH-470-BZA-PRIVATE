@@ -51,6 +51,7 @@ import com.jws.jwsapi.core.user.UserPinDialog;
 import com.jws.jwsapi.core.user.UserPinInterface;
 import com.jws.jwsapi.databinding.StandarMenuBinding;
 import com.jws.jwsapi.scale.ScaleFragment;
+import com.jws.jwsapi.shared.ApiFragment;
 import com.jws.jwsapi.shared.UserRepository;
 import com.jws.jwsapi.utils.AdapterCommon;
 import com.jws.jwsapi.utils.ThemeDialog;
@@ -240,7 +241,7 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
 
     private void handleSettingsMenu(int position) {
         if (position == ITEM_PROGRAMA) {
-            handleLabelItem();
+            handleUserAction(() -> mainActivity.mainClass.openFragment(new ApiFragment()), ROLE_OPERATOR);
         }
         if (position == ITEM_BALANZA) {
             handleUserAction(() -> mainActivity.mainClass.openFragment(new ScaleFragment()), ROLE_OPERATOR);

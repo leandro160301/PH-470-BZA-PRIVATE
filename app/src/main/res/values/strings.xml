@@ -459,6 +459,9 @@
     <string name="dialog_scale_fragment_zero_band">Ingrese la banda de cero</string>
     <string name="dialog_scale_fragment_stable_count">Ingrese las cuentas estable</string>
     <string name="toast_message_wrong_value_scale">Valor ingresado no valido</string>
+    <string name="dialog_api_scale_code">Ingrese el codigo de balanza</string>
+    <string name="fragment_programa_title">PROGRAMA</string>
+    <string name="fragment_scale_title">BALANZA</string>
 
 
 </resources>
