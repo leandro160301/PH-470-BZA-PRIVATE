@@ -230,7 +230,7 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
         binding.tvProduct.setText(pallet != null ? pallet.getName() : "");
         binding.tvPalletOrigin.setText(pallet != null ? pallet.getOriginPallet() : "");
         binding.tvPalletDestination.setText(pallet != null ? pallet.getDestinationPallet() : "");
-        binding.tvScale.setText(pallet != null ? String.valueOf(pallet.getScaleNumber()) : "");
+        binding.tvCode.setText(pallet != null ? String.valueOf(pallet.getCode()) : "");
         binding.tvTotalNet.setText(pallet != null ? pallet.getTotalNet() : "");
         binding.tvNetApi.setText(pallet != null ? pallet.getApiNet() : "");
     }
