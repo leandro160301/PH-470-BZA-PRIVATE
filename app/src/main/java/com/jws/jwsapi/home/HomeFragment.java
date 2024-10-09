@@ -40,8 +40,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class HomeFragment extends Fragment implements ScaleConformationListener {
 
-    private static final int OPERATION_BUTTONS = 0;
-    private static final int SCALE_BUTTONS = 1;
     @Inject
     WeighRepository repository;
     @Inject
@@ -56,7 +54,7 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     private WeighingViewModel weighingViewModel;
     private ScaleViewModel serviceScaleViewModel;
     private PalletViewModel palletViewModel;
-    private int buttons = OPERATION_BUTTONS;
+    private boolean isScaleMode = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -187,13 +185,12 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     }
 
     private void changeMode() {
-        if (buttons == OPERATION_BUTTONS) {
-            buttons = SCALE_BUTTONS;
-            setupButtonsScale();
-        } else {
-            buttons = OPERATION_BUTTONS;
+        if (isScaleMode) {
             setupButtons();
+        } else {
+            setupButtonsScale();
         }
+        isScaleMode = !isScaleMode;
     }
 
     private void setupButtonsScale() {
