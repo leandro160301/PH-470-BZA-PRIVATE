@@ -36,21 +36,21 @@ public class PalletService {
                 });
     }
 
-    public Single<PalletCloseResponse> closePallet(PalletCloseRequest palletCloseRequest, String serialNumber) {
+    public Single<PalletCloseResponse> closePallet(PalletCloseRequest palletCloseRequest, int id) {
         return palletApi.closePallet(palletCloseRequest)
                 .doOnSuccess(palletCloseResponse -> {
                     if (palletCloseResponse.getStatus()) {
-                        palletDao.updatePalletClosedStatus(serialNumber, true);
+                        palletDao.updatePalletClosedStatus(id, true);
                     }
 
                 });
     }
 
-    public Single<PalletCloseResponse> deletePallet(PalletCloseRequest palletCloseRequest, String serialNumber) {
+    public Single<PalletCloseResponse> deletePallet(PalletCloseRequest palletCloseRequest, int id) {
         return palletApi.closePallet(palletCloseRequest)
                 .doOnSuccess(palletCloseResponse -> {
                     if (palletCloseResponse.getStatus()) {
-                        palletDao.deletePalletBySerialNumber(serialNumber);
+                        palletDao.deletePalletBySerialNumber(id);
                     }
                 });
     }

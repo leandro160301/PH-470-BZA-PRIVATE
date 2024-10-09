@@ -140,18 +140,18 @@ public class PalletViewModel extends ViewModel {
         compositeDisposable.add(disposable);
     }
 
-    public void closePallet(String serialNumber) {
+    public void closePallet() {
         Pallet pallet = palletRepository.getCurrentPallet().getValue();
         if (pallet != null) {
-            handlePalletRequest(palletService.closePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), serialNumber));
+            handlePalletRequest(palletService.closePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), pallet.getId()));
         }
 
     }
 
-    public void deletePallet(String serialNumber) {
+    public void deletePallet() {
         Pallet pallet = palletRepository.getCurrentPallet().getValue();
         if (pallet != null) {
-            handlePalletRequest(palletService.deletePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), serialNumber));
+            handlePalletRequest(palletService.deletePallet(new PalletCloseRequest("c16c9ac1deca7c4db51e8c73800d4ced", pallet.getOriginPallet()), pallet.getId()));
         }
     }
 

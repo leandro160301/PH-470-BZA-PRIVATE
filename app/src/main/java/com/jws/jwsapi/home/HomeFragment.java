@@ -21,8 +21,8 @@ import com.jws.jwsapi.pallet.Pallet;
 import com.jws.jwsapi.pallet.PalletCreateFragment;
 import com.jws.jwsapi.pallet.PalletFragment;
 import com.jws.jwsapi.pallet.PalletViewModel;
-import com.jws.jwsapi.scale.ScaleViewModel;
 import com.jws.jwsapi.scale.ScaleConformationListener;
+import com.jws.jwsapi.scale.ScaleViewModel;
 import com.jws.jwsapi.shared.PalletRepository;
 import com.jws.jwsapi.shared.WeighRepository;
 import com.jws.jwsapi.utils.ToastHelper;
@@ -238,7 +238,7 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     private void closePallet() {
         Pallet currentPallet = palletRepository.getCurrentPallet().getValue();
         if (currentPallet != null) {
-            palletViewModel.closePallet(currentPallet.getSerialNumber());
+            palletViewModel.closePallet();
         } else {
             messageError(getString(R.string.toast_error_close_pallet));
         }

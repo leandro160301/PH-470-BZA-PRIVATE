@@ -53,7 +53,7 @@ public class PalletCreateFragment extends Fragment {
         palletViewModel.getPalletResponse().observe(getViewLifecycleOwner(), palletResponse -> {
             if (palletResponse != null) {
                 if (palletResponse.getMessage() != null && !palletResponse.getMessage().isEmpty()) {
-                    ToastHelper.message(palletResponse.getMessage(), R.layout.item_customtoast, getContext());
+                    ToastHelper.message(palletResponse.getMessage(), R.layout.item_customtoastok, getContext());
                 }
             }
         });

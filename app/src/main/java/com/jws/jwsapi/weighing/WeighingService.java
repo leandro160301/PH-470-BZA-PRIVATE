@@ -23,10 +23,13 @@ public class WeighingService {
     public Single<WeighingResponse> newWeighing(WeighingRequest weighingRequest, Weighing weighing, int id) {
         return weighingApi.postNewWeighing(weighingRequest)
                 .doOnSuccess(palletResponse -> {
-                    weighingDao.insertWeighing(weighing);
-                    palletDao.incrementDoneById(id);
-                    palletDao.updatePalletSerialNumber(id, weighing.getSerialNumber());
-                    palletDao.updatePalletTotalNet(id, weighing.getNet());
+                    if (palletResponse != null && palletResponse.getStatus() != null && palletResponse.getStatus()) {
+                        weighingDao.insertWeighing(weighing);
+                        palletDao.incrementDoneById(id);
+                        palletDao.updatePalletSerialNumber(id, weighing.getSerialNumber());
+                        palletDao.updatePalletTotalNet(id, weighing.getNet());
+                    }
+
                 });
     }
 

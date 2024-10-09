@@ -458,6 +458,7 @@
     <string name="gpio_fragment_input8">Entrada 8</string>
     <string name="dialog_scale_fragment_zero_band">Ingrese la banda de cero</string>
     <string name="dialog_scale_fragment_stable_count">Ingrese las cuentas estable</string>
+    <string name="toast_message_wrong_value_scale">Valor ingresado no valido</string>
 
 
 </resources>

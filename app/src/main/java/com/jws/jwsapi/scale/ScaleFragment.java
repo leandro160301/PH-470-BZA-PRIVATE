@@ -68,14 +68,14 @@ public class ScaleFragment extends Fragment {
             if (isNumeric(value)) {
                 scalePreferences.setZeroBand(Double.parseDouble(value));
             } else {
-                message("Valor no valido",R.layout.item_customtoasterror,requireContext());
+                message(getString(R.string.toast_message_wrong_value_scale), R.layout.item_customtoasterror, requireContext());
             }
         }));
         binding.tvStableCount.setOnClickListener(v -> keyboardInt(binding.tvStableCount, getString(R.string.dialog_scale_fragment_stable_count), getContext(), value -> {
             if (isNumeric(value)) {
                 scalePreferences.setStableCountThreshold(Integer.parseInt(value));
             } else {
-                message("Valor no valido",R.layout.item_customtoasterror,requireContext());
+                message(getString(R.string.toast_message_wrong_value_scale), R.layout.item_customtoasterror, requireContext());
             }
         }));
     }

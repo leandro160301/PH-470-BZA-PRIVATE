@@ -243,7 +243,7 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
             handleLabelItem();
         }
         if (position == ITEM_BALANZA) {
-            handleUserAction(() -> mainActivity.mainClass.openFragment(new ScaleFragment()),ROLE_OPERATOR);
+            handleUserAction(() -> mainActivity.mainClass.openFragment(new ScaleFragment()), ROLE_OPERATOR);
         }
         if (position == ITEM_ETIQUETAS) {
             handleLabelItem();
