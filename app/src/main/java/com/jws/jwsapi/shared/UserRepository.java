@@ -1,6 +1,7 @@
 package com.jws.jwsapi.shared;
 
 import static com.jws.jwsapi.core.user.UserConstants.DB_USERS_NAME;
+import static com.jws.jwsapi.core.user.UserConstants.ROLE_NOT_LOGGED;
 import static com.jws.jwsapi.core.user.UserConstants.ROLE_OPERATOR;
 import static com.jws.jwsapi.core.user.UserConstants.ROLE_SUPERVISOR;
 
@@ -19,7 +20,7 @@ import javax.inject.Inject;
 
 public class UserRepository {
     private final Application application;
-    private int userLevel = 0;
+    private int userLevel = ROLE_NOT_LOGGED;
     private String userName = "";
 
     @Inject
