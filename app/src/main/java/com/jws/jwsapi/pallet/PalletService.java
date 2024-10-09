@@ -21,7 +21,6 @@ public class PalletService {
     public Single<PalletResponse> createPallet(PalletRequest palletRequest) {
         return palletApi.postNewPallet(palletRequest)
                 .doOnSuccess(palletResponse -> {
-                    System.out.println("Respuesta del servidor: " + palletResponse.toString());
                     if (palletResponse.getSuccess()) {
                         Pallet pallet = new Pallet();
                         pallet.setOriginPallet(palletRequest.getOriginPallet());

@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment implements WeightConformationListener
 
     private void handleWeighingResponse(WeighingResponse weighingResponse) {
         if (weighingResponse != null) {
-            if (weighingResponse.getStatus()) {
+            if (weighingResponse.getStatus() != null && weighingResponse.getStatus()) {
                 showMessage(requireContext().getString(R.string.toast_message_weighing_created), R.layout.item_customtoastok);
                 homeService.print(mainActivity, serviceScaleViewModel.getScaleService().getSerialPort(repository.getScaleNumber()));
                 repository.setTare();
