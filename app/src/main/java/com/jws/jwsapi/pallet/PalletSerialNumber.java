@@ -5,17 +5,17 @@ import android.annotation.SuppressLint;
 public class PalletSerialNumber {
     @SuppressLint("DefaultLocale")
     public static String incrementSerialNumber(String serialNumber) {
-        String[] partes = serialNumber.split("-");
-        if (partes.length == 2) {
-            String prefijo = partes[0];
-            String numero = partes[1];
+        String[] parts = serialNumber.split("-");
+        if (parts.length == 2) {
+            String pre = parts[0];
+            String number = parts[1];
 
-            long numeroIncrementado = Long.parseLong(numero) + 1;
-
-            return String.format("%s-%d", prefijo, numeroIncrementado);
+            int originalLenght = number.length();
+            long incrementNumber = Long.parseLong(number) + 1;
+            String formattedNumber = String.format("%0" + originalLenght + "d", incrementNumber);
+            return String.format("%s-%s", pre, formattedNumber);
         } else {
             return serialNumber;
         }
-
     }
 }

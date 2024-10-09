@@ -7,6 +7,9 @@ public class PalletResponse {
     @SerializedName("success")
     private Boolean success;
 
+    @SerializedName("message")
+    private String message;
+
     @SerializedName("data")
     private PalletResponseData data;
 
@@ -26,4 +29,11 @@ public class PalletResponse {
         this.success = success;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

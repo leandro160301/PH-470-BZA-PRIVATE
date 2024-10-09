@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.jws.jwsapi.shared.PalletRepository;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 
 @HiltViewModel
 public class PalletViewModel extends ViewModel {
@@ -82,6 +86,11 @@ public class PalletViewModel extends ViewModel {
         this.palletDestination.setValue(palletDestination);
     }
 
+    public void clearPalletData() {
+        this.palletOrigin.setValue("");
+        this.palletDestination.setValue("");
+    }
+
     public void createPallet() {
         if (isValidPallet()) {
             PalletRequest palletRequest = new PalletRequest("c16c9ac1deca7c4db51e8c73800d4ced",
@@ -107,8 +116,25 @@ public class PalletViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> loading.setValue(false))
                 .subscribe(
-                        palletResponse::setValue,
-                        throwable -> error.setValue(throwable.getMessage())
+                        palletResponse1 -> {
+                            palletResponse.setValue(palletResponse1);
+                            clearPalletData();
+                        },
+                        throwable -> {
+                            if (throwable instanceof HttpException) {
+                                ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
+                                try {
+                                    String errorBody = responseBody.string();
+                                    JSONObject jsonObject = new JSONObject(errorBody);
+                                    String errorMessage = jsonObject.optString("message", "Error desconocido");
+                                    error.setValue(errorMessage);
+                                } catch (Exception e) {
+                                    error.setValue("Error al leer el mensaje de error");
+                                }
+                            } else {
+                                error.setValue("Error inesperado: " + throwable.getMessage());
+                            }
+                        }
                 );
 
         compositeDisposable.add(disposable);
