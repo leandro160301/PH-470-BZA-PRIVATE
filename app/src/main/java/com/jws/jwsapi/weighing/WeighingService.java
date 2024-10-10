@@ -31,7 +31,7 @@ public class WeighingService {
                         palletDao.updatePalletTotalNet(id, weighing.getNet());
                         Pallet pallet = palletDao.getPalletById(id, true).getValue();
                         if (pallet != null && weighing.getQuantity() == pallet.getDone()) {
-                            palletDao.updatePalletClosedStatus(id, false);
+                            palletDao.updatePalletClosedStatus(id, true);
                         }
                     }
 
