@@ -165,7 +165,6 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
             if (weighingResponse.getStatus() != null && weighingResponse.getStatus()) {
                 showMessage(requireContext().getString(R.string.toast_message_weighing_created), R.layout.item_customtoastok);
                 homeService.print(mainActivity, serviceScaleViewModel.getScaleService().getSerialPort(repository.getScaleNumber()));
-                repository.setTare();
             } else if (weighingResponse.getError() != null) {
                 showMessage(weighingResponse.getError(), R.layout.item_customtoasterror);
             }

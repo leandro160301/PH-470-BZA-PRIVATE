@@ -142,7 +142,6 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
         binding.recycler1.setAdapter(adapter);
     }
 
-
     private void loadItem(int menu) {
         setupItems(Arrays.asList(getResources().getStringArray(menu)));
     }
@@ -212,7 +211,7 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
                 setupSubItems(Arrays.asList(getResources().getStringArray(R.array.menu_subitems_printer)));
                 break;
             case ITEM_ENTRADAS:
-                mainActivity.mainClass.openFragment(new GpioFragment());
+                handleUserAction(() -> mainActivity.mainClass.openFragment(new GpioFragment()), ROLE_OPERATOR);
                 break;
         }
     }
@@ -247,12 +246,8 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
             handleUserAction(() -> mainActivity.mainClass.openFragment(new ScaleFragment()), ROLE_OPERATOR);
         }
         if (position == ITEM_ETIQUETAS) {
-            handleLabelItem();
+            handleUserAction(() -> mainActivity.mainClass.openFragment(new LabelProgramFragment()), ROLE_OPERATOR);
         }
-    }
-
-    private void handleLabelItem() {
-        handleUserAction(() -> mainActivity.mainClass.openFragment(new LabelProgramFragment()), ROLE_OPERATOR);
     }
 
     private NavigationAdapter setupItemRecycler(RecyclerView recyclerView, List<String> list) {

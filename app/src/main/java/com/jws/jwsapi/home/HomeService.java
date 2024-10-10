@@ -44,6 +44,7 @@ public class HomeService {
                         labelManager.setName(pallet.getName());
                         PrinterManager printerManager = new PrinterManager(mainActivity, mainActivity, userRepository, printerPreferences, labelManager, weighRepository);
                         printerManager.printLabelInMemory(serialPort, 0);
+                        weighRepository.setTare();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

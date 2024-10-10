@@ -28,6 +28,9 @@ public interface PalletDao {
     @Query("DELETE FROM pallet WHERE id = :id")
     void deletePallet(int id);
 
+    @Query("SELECT serial_number FROM pallet WHERE origin_pallet = :pallet ORDER BY CAST(SUBSTR(serial_number, INSTR(serial_number, '-') + 1) AS INTEGER) DESC LIMIT 1")
+    String getMaxSerialNumberFromPallet(String pallet);
+
     @Insert
     void insertPallet(Pallet pallet);
 
