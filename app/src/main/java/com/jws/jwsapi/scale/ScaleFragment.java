@@ -66,14 +66,22 @@ public class ScaleFragment extends Fragment {
     private void setOnClickListeners() {
         binding.tvZeroBand.setOnClickListener(v -> keyboardFloat(binding.tvZeroBand, getString(R.string.dialog_scale_fragment_zero_band), getContext(), value -> {
             if (isNumeric(value)) {
-                scalePreferences.setZeroBand(Double.parseDouble(value));
+                try {
+                    scalePreferences.setZeroBand(Double.parseDouble(value));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             } else {
                 message(getString(R.string.toast_message_wrong_value_scale), R.layout.item_customtoasterror, requireContext());
             }
         }));
         binding.tvStableCount.setOnClickListener(v -> keyboardInt(binding.tvStableCount, getString(R.string.dialog_scale_fragment_stable_count), getContext(), value -> {
             if (isNumeric(value)) {
-                scalePreferences.setStableCountThreshold(Integer.parseInt(value));
+                try {
+                    scalePreferences.setStableCountThreshold(Integer.parseInt(value));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             } else {
                 message(getString(R.string.toast_message_wrong_value_scale), R.layout.item_customtoasterror, requireContext());
             }

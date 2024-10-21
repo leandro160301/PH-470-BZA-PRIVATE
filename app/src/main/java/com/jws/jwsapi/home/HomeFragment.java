@@ -270,6 +270,9 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
 
     @Override
     public void onWeightConformed() {
-        getActivity().runOnUiThread(this::createWeighing);
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(this::createWeighing);
+        }
+
     }
 }
