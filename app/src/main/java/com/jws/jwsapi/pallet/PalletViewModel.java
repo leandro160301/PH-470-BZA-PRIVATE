@@ -123,21 +123,41 @@ public class PalletViewModel extends ViewModel {
                             this.palletResponse.setValue(palletResponse);
                             clearPalletData();
                         },
-                        throwable -> {
-                            if (throwable instanceof HttpException) {
-                                ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
-                                try {
-                                    String errorBody = responseBody.string();
-                                    JSONObject jsonObject = new JSONObject(errorBody);
-                                    String errorMessage = jsonObject.optString("message", "Error desconocido");
-                                    error.setValue(errorMessage);
-                                } catch (Exception e) {
-                                    error.setValue("Error al leer el mensaje de error");
-                                }
-                            } else {
-                                error.setValue("Error inesperado: " + throwable.getMessage());
-                            }
-                        }
+                        this::handleMessageFix
+                );
+
+        compositeDisposable.add(disposable);
+    }
+
+    private void handleMessageFix(Throwable throwable) {
+        try {
+            if (throwable instanceof HttpException) {
+                ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
+                try {
+                    String errorBody = responseBody.string();
+                    JSONObject jsonObject = new JSONObject(errorBody);
+                    String errorMessage = jsonObject.optString("message", "Error desconocido");
+                    error.setValue(errorMessage);
+                } catch (Exception e) {
+                    error.setValue("Error al leer el mensaje de error");
+                }
+            } else {
+                error.setValue("Error inesperado: " + throwable.getMessage());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handlePalletRequest(Single<PalletCloseResponse> request) {
+        loading.setValue(true);
+        Disposable disposable = request
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> loading.setValue(false))
+                .subscribe(
+                        palletCloseResponse::setValue,
+                        this::handleMessageFix
                 );
 
         compositeDisposable.add(disposable);
@@ -153,34 +173,6 @@ public class PalletViewModel extends ViewModel {
         handlePalletRequest(palletService.deletePallet(new PalletCloseRequest(apiPreferences.getScaleCode(),
                 pallet.getOriginPallet()), pallet.getId()));
 
-    }
-
-    private void handlePalletRequest(Single<PalletCloseResponse> request) {
-        loading.setValue(true);
-        Disposable disposable = request
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally(() -> loading.setValue(false))
-                .subscribe(
-                        palletCloseResponse::setValue,
-                        throwable -> {
-                            if (throwable instanceof HttpException) {
-                                ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
-                                try {
-                                    String errorBody = responseBody.string();
-                                    JSONObject jsonObject = new JSONObject(errorBody);
-                                    String errorMessage = jsonObject.optString("message", "Error desconocido");
-                                    error.setValue(errorMessage);
-                                } catch (Exception e) {
-                                    error.setValue("Error al leer el mensaje de error");
-                                }
-                            } else {
-                                error.setValue("Error inesperado: " + throwable.getMessage());
-                            }
-                        }
-                );
-
-        compositeDisposable.add(disposable);
     }
 
     @Override

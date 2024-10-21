@@ -25,11 +25,11 @@ public class MouseAccessibilityService extends AccessibilityService {
 
     private static MouseAccessibilityService instance;
 
-    private AtomicBoolean lock = new AtomicBoolean(false);
+    private final AtomicBoolean lock = new AtomicBoolean(false);
     private boolean isMouseDown = false;
     private GestureDescription.StrokeDescription currentStroke = null;
     private int prevX = 0, prevY = 0;
-    private List<GestureDescription> gestureList = new LinkedList<>();
+    private final List<GestureDescription> gestureList = new LinkedList<>();
     private Display display = null;
 
     @Override
@@ -47,7 +47,7 @@ public class MouseAccessibilityService extends AccessibilityService {
     }
 
     public void setContext(Context context) {
-        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         display = wm.getDefaultDisplay();
     }
 
@@ -106,8 +106,7 @@ public class MouseAccessibilityService extends AccessibilityService {
         if (!isContinuedGesture) {
             stroke = new GestureDescription.StrokeDescription(path, startTime, duration,
                     willContinue);
-        }
-        else {
+        } else {
             stroke = currentStroke.continueStroke(path, startTime, duration, willContinue);
         }
 
@@ -193,11 +192,13 @@ public class MouseAccessibilityService extends AccessibilityService {
         if (!instance.dispatchGesture(gesture, gestureResultCallback, null)) {
             Log.e(TAG, "Gesture was not dispatched");
             gestureList.clear();
-            return;
         }
     }
 
-    private GestureResultCallback gestureResultCallback =
+    public void backButtonClick() {
+        Log.d(TAG, "Back button pressed");
+        instance.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK);
+    }    private final GestureResultCallback gestureResultCallback =
             new GestureResultCallback() {
                 @Override
                 public void onCompleted(GestureDescription gestureDescription) {
@@ -221,11 +222,6 @@ public class MouseAccessibilityService extends AccessibilityService {
                 }
             };
 
-    public void backButtonClick() {
-        Log.d(TAG, "Back button pressed");
-        instance.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK);
-    }
-
     public void homeButtonClick() {
         Log.d(TAG, "Home button pressed");
         instance.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME);
@@ -247,7 +243,7 @@ public class MouseAccessibilityService extends AccessibilityService {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 instance.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN);
             } else {
-              //  AdminActivity.lockScreen(instance);
+                //  AdminActivity.lockScreen(instance);
             }
         else
             wakeScreenIfNecessary();
@@ -267,8 +263,10 @@ public class MouseAccessibilityService extends AccessibilityService {
 
         PowerManager.WakeLock screenLock =
                 pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                                PowerManager.ACQUIRE_CAUSES_WAKEUP, TAG);
+                        PowerManager.ACQUIRE_CAUSES_WAKEUP, TAG);
         screenLock.acquire();
         screenLock.release();
     }
+
+
 }

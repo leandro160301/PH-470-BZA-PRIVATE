@@ -72,24 +72,28 @@ public class WeighingViewModel extends ViewModel {
     }
 
     public void createWeighing(String gross, String net, String tare, String unit) {
-        Weighing weighing = new Weighing();
-        Pallet pallet = getCurrentPallet().getValue();
-        if (pallet != null) {
-            weighing.setCode(pallet.getCode());
-            weighing.setGross(gross);
-            weighing.setTare(tare);
-            weighing.setNet(net);
-            weighing.setUnit(unit);
-            weighing.setName(pallet.getName());
-            weighing.setOperator(userRepository.getCurrentUser());
-            weighing.setIdPallet(pallet.getId());
-            weighing.setScaleNumber(pallet.getScaleNumber());
-            weighing.setQuantity(pallet.getQuantity());
-            weighing.setSerialNumber(incrementSerialNumber(pallet.getSerialNumber()));
-            WeighingRequest weighingRequest = new WeighingRequest(apiPreferences.getScaleCode(), pallet.getOriginPallet(), incrementSerialNumber(pallet.getSerialNumber()), net, gross);
-            createWeighingRequest(weighingRequest, weighing);
-        } else {
-            error.setValue("Error de pallet");
+        try {
+            Weighing weighing = new Weighing();
+            Pallet pallet = getCurrentPallet().getValue();
+            if (pallet != null) {
+                weighing.setCode(pallet.getCode());
+                weighing.setGross(gross);
+                weighing.setTare(tare);
+                weighing.setNet(net);
+                weighing.setUnit(unit);
+                weighing.setName(pallet.getName());
+                weighing.setOperator(userRepository.getCurrentUser());
+                weighing.setIdPallet(pallet.getId());
+                weighing.setScaleNumber(pallet.getScaleNumber());
+                weighing.setQuantity(pallet.getQuantity());
+                weighing.setSerialNumber(incrementSerialNumber(pallet.getSerialNumber()));
+                WeighingRequest weighingRequest = new WeighingRequest(apiPreferences.getScaleCode(), pallet.getOriginPallet(), incrementSerialNumber(pallet.getSerialNumber()), net, gross);
+                createWeighingRequest(weighingRequest, weighing);
+            } else {
+                error.setValue("Error de pallet");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
