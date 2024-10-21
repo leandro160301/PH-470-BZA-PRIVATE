@@ -100,8 +100,9 @@ public class WeighingViewModel extends ViewModel {
     public void createWeighingRequest(WeighingRequest weighingRequest, Weighing weighing) {
         loading.setValue(true);
         Integer id = repository.getCurrentPalletId();
-        if (id != null && id > -1) {
-            Disposable disposable = weighingService.newWeighing(weighingRequest, weighing, id)
+        Pallet pallet = currentPallet.getValue();
+        if (pallet != null && id != null && id > -1) {
+            Disposable disposable = weighingService.newWeighing(weighingRequest, weighing, id, pallet)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doFinally(() -> loading.setValue(false))

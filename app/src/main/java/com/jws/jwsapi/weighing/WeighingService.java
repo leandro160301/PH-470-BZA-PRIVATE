@@ -21,7 +21,7 @@ public class WeighingService {
         this.palletDao = palletDao;
     }
 
-    public Single<WeighingResponse> newWeighing(WeighingRequest weighingRequest, Weighing weighing, int id) {
+    public Single<WeighingResponse> newWeighing(WeighingRequest weighingRequest, Weighing weighing, int id, Pallet pallet) {
         return weighingApi.postNewWeighing(weighingRequest)
                 .doOnSuccess(palletResponse -> {
                     if (palletResponse != null && palletResponse.getStatus() != null && palletResponse.getStatus()) {
@@ -29,8 +29,7 @@ public class WeighingService {
                         palletDao.incrementDoneById(id);
                         palletDao.updatePalletSerialNumber(id, weighing.getSerialNumber());
                         palletDao.updatePalletTotalNet(id, weighing.getNet());
-                        Pallet pallet = palletDao.getPalletById(id, true).getValue();
-                        if (pallet != null && weighing.getQuantity() == pallet.getDone()) {
+                        if (pallet != null && weighing.getQuantity() == pallet.getDone() + 1) {
                             palletDao.updatePalletClosedStatus(id, true);
                         }
                     }
