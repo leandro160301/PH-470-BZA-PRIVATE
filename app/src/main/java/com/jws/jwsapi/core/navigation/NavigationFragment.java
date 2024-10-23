@@ -151,12 +151,12 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
     }
 
     private void handleService() {
-        handleUserAction(() -> {
+        /*handleUserAction(() -> {
             ServiceFragment fragment = ServiceFragment.newInstance(mainActivity.mainClass.service);
             Bundle args = new Bundle();
             args.putSerializable("instanceService", mainActivity.mainClass.service);
             mainActivity.mainClass.openFragmentService(fragment, args);
-        }, ROLE_OPERATOR);
+        }, ROLE_OPERATOR);*/
     }
 
     private void setupItems(List<String> list) {
