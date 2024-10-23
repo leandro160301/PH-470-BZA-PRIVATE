@@ -1,5 +1,8 @@
 package com.jws.jwsapi.core.gpio;
 
+import static com.jws.jwsapi.core.gpio.GpioConstants.OFF;
+import static com.jws.jwsapi.core.gpio.GpioConstants.ON;
+
 import com.android.jws.JwsManager;
 
 import java.util.concurrent.TimeUnit;
@@ -13,10 +16,8 @@ import io.reactivex.schedulers.Schedulers;
 @SuppressWarnings("unused")
 public class GpioInputsService {
 
-    private final static int OFF = 1;
-    private final static int ON = 0;
     private final static int PERIOD = 1;
-    private final static int STABLE_THRESHOLD = 4;
+    private final static int STABLE_THRESHOLD = 2;
     private final static int INPUT_LENGHT = 8;
 
     private final JwsManager jwsManager;
@@ -108,38 +109,9 @@ public class GpioInputsService {
         }
     }
 
-    public int getCurrentInputValue1() {
-        return currentInputValues[0];
+    public Integer getCurrentValue(int gpio) {
+        return currentInputValues[gpio];
     }
-
-    public Integer getCurrentInputValue2() {
-        return currentInputValues[1];
-    }
-
-    public Integer getCurrentInputValue3() {
-        return currentInputValues[2];
-    }
-
-    public Integer getCurrentInputValue4() {
-        return currentInputValues[3];
-    }
-
-    public Integer getCurrentInputValue5() {
-        return currentInputValues[4];
-    }
-
-    public Integer getCurrentInputValue6() {
-        return currentInputValues[5];
-    }
-
-    public Integer getCurrentInputValue7() {
-        return currentInputValues[6];
-    }
-
-    public Integer getCurrentInputValue8() {
-        return currentInputValues[7];
-    }
-
 
     public void setHighListener(GpioHighListener gpioHighListener) {
         this.highListener = gpioHighListener;

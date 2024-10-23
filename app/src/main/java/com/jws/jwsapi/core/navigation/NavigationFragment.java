@@ -222,7 +222,7 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
                 handleUserAction(() -> new DateDialog(this, getContext()).showDialog(), ROLE_OPERATOR);
                 break;
             case ITEM_TEMA:
-                handleUserAction(() -> new ThemeDialog(requireContext(), this).showDialog(), ROLE_OPERATOR);
+                handleUserAction(() -> new ThemeDialog(getContext(), this).showDialog(), ROLE_OPERATOR);
                 break;
         }
     }
