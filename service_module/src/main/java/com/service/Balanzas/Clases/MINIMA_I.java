@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.service.Balanzas.BalanzaService;
 import com.service.Balanzas.Fragments.CalibracionMinimaFragment;
 import com.service.Balanzas.Interfaz.Balanza;
-import com.service.PuertosSerie.PuertosSerie;
+import com.service.Comunicacion.OnFragmentChangeListener;
 import com.service.PuertosSerie.PuertosSerie2;
 import com.service.R;
 import com.service.Utils;
@@ -23,8 +23,6 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import com.service.Comunicacion.OnFragmentChangeListener;
 
 public class MINIMA_I implements Balanza.Struct, Serializable {
 

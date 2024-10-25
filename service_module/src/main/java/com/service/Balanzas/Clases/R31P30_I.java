@@ -10,7 +10,6 @@ import com.service.Balanzas.Interfaz.Balanza;
 import com.service.Comunicacion.OnFragmentChangeListener;
 import com.service.PuertosSerie.PuertosSerie2;
 import com.service.Utils;
-import com.service.PuertosSerie.PuertosSerie;
 
 import java.io.IOException;
 import java.math.BigDecimal;

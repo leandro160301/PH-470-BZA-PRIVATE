@@ -17,6 +17,8 @@ import androidx.core.content.ContextCompat;
 
 import com.android.jws.JwsManager;
 import com.jws.jwsapi.core.data.local.PreferencesManager;
+import com.jws.jwsapi.core.lock.LockFragment;
+import com.jws.jwsapi.core.lock.LockManager;
 import com.jws.jwsapi.core.services.FtpServer;
 import com.jws.jwsapi.core.services.httpserver.InitServer;
 import com.jws.jwsapi.core.storage.StorageService;
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     WeighingService weighingService;
     @Inject
     PalletService palletService;
+    @Inject
+    LockManager lockManager;
     private InitServer initServer;
 
     @Override
@@ -65,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
         initService();
         initMainClass();
         initPendrive();
+        lockDialog();
+
+    }
+
+    private void lockDialog() {
+        if (lockManager.isLockedEnabled()) {
+            Integer remainingDays = lockManager.remainingDays();
+            if (remainingDays != null && remainingDays <= 5 && remainingDays > 0) {
+                dialogText(this, "Quedan " + remainingDays + " dias de uso para el bloqueo",
+                        "DESBLOQUEAR", () -> mainClass.openFragment(new LockFragment()));
+            }
+        }
 
     }
 
@@ -93,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initMainClass() {
-        mainClass = new MainClass(this, this, userRepository);
+        mainClass = new MainClass(this, this, userRepository, lockManager);
         mainClass.init();
     }
 

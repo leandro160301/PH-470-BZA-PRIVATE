@@ -9,10 +9,8 @@ import com.service.Balanzas.BalanzaService;
 import com.service.Balanzas.Fragments.CalibracionItw410Fragment;
 import com.service.Balanzas.Interfaz.Balanza;
 import com.service.Comunicacion.OnFragmentChangeListener;
-import com.service.Modbus.ModbusMasterRtu;
 import com.service.Modbus.Req.ModbusReqRtuMaster;
 import com.service.PuertosSerie.PuertosSerie2;
-import com.zgkxzx.modbus4And.requset.ModbusReq;
 import com.zgkxzx.modbus4And.requset.OnRequestBack;
 
 import java.io.Serializable;

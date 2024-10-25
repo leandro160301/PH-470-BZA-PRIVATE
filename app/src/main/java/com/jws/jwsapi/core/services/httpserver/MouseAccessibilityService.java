@@ -203,29 +203,7 @@ public class MouseAccessibilityService extends AccessibilityService {
     public void homeButtonClick() {
         Log.d(TAG, "Home button pressed");
         instance.performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME);
-    }    private final GestureResultCallback gestureResultCallback =
-            new GestureResultCallback() {
-                @Override
-                public void onCompleted(GestureDescription gestureDescription) {
-                    synchronized (lock) {
-                        gestureList.remove(0);
-                        if (gestureList.isEmpty())
-                            return;
-                        dispatchGestureHandler();
-                    }
-
-                    super.onCompleted(gestureDescription);
-                }
-
-                @Override
-                public void onCancelled(GestureDescription gestureDescription) {
-                    synchronized (lock) {
-                        Log.w(TAG, "Gesture canceled");
-                        gestureList.remove(0);
-                        super.onCancelled(gestureDescription);
-                    }
-                }
-            };
+    }
 
     public void recentButtonClick() {
         Log.d(TAG, "Recent button pressed");
@@ -268,7 +246,29 @@ public class MouseAccessibilityService extends AccessibilityService {
         screenLock.release();
     }
 
+    private final GestureResultCallback gestureResultCallback =
+            new GestureResultCallback() {
+                @Override
+                public void onCompleted(GestureDescription gestureDescription) {
+                    synchronized (lock) {
+                        gestureList.remove(0);
+                        if (gestureList.isEmpty())
+                            return;
+                        dispatchGestureHandler();
+                    }
 
+                    super.onCompleted(gestureDescription);
+                }
+
+                @Override
+                public void onCancelled(GestureDescription gestureDescription) {
+                    synchronized (lock) {
+                        Log.w(TAG, "Gesture canceled");
+                        gestureList.remove(0);
+                        super.onCancelled(gestureDescription);
+                    }
+                }
+            };
 
 
 }

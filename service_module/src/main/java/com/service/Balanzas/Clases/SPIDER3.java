@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.service.Balanzas.Interfaz.Balanza;
-import com.service.Utils;
 import com.service.PuertosSerie.PuertosSerie;
+import com.service.Utils;
 
 import java.io.IOException;
 import java.math.BigDecimal;

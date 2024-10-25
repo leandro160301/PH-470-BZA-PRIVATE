@@ -344,6 +344,7 @@
     <string-array name="menu_items_scale">
         <item>Fecha y hora</item>
         <item>Tema</item>
+        <item>Bloqueo</item>
     </string-array>
 
     <string-array name="menu_items_settings">

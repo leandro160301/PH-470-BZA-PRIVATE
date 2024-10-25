@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.jws.jwsapi.core.container.ContainerCoreFragment;
 import com.jws.jwsapi.core.container.ContainerFragment;
+import com.jws.jwsapi.core.lock.LockFragment;
+import com.jws.jwsapi.core.lock.LockManager;
 import com.jws.jwsapi.home.HomeFragment;
 import com.jws.jwsapi.shared.UserRepository;
 import com.service.Balanzas.BalanzaService;
@@ -22,15 +24,17 @@ public class MainClass implements OnFragmentChangeListener {
     public static String DB_NAME = "bza-database";
     private final Context context;
     private final MainActivity mainActivity;
+    private final UserRepository userRepository;
+    private final LockManager lockManager;
     public BalanzaService service;
     public BalanzaService.Balanzas bza;
     Boolean clickEnable = true;
-    UserRepository userRepository;
 
-    public MainClass(Context context, MainActivity activity, UserRepository userRepository) {
+    public MainClass(Context context, MainActivity activity, UserRepository userRepository, LockManager lockManager) {
         this.context = context;
         this.mainActivity = activity;
         this.userRepository = userRepository;
+        this.lockManager = lockManager;
     }
 
     public void init() {
@@ -46,12 +50,18 @@ public class MainClass implements OnFragmentChangeListener {
 
     @Override
     public void openFragmentPrincipal() {
-        Fragment fragment = new HomeFragment();
-        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-        ContainerCoreFragment containerFragment = ContainerCoreFragment.newInstance(fragment.getClass());
-        fragmentManager.beginTransaction()
-                .replace(R.id.container_fragment, containerFragment)
-                .commit();
+        lockManager.updateDate();
+        if (!lockManager.isLocked()) {
+            Fragment fragment = new HomeFragment();
+            FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+            ContainerCoreFragment containerFragment = ContainerCoreFragment.newInstance(fragment.getClass());
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, containerFragment)
+                    .commit();
+        } else {
+            openFragment(new LockFragment());
+        }
+
     }
 
     public void openFragment(Fragment fragment) {

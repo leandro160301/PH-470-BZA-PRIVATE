@@ -179,6 +179,13 @@
                                         android:layout_height="match_parent"
                                         android:orientation="horizontal">
 
+                                        <LinearLayout
+                                            android:id="@+id/bt_padlock"
+                                            android:layout_width="68dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/padlock"
+                                            android:orientation="horizontal" />
+
                                         <RelativeLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"

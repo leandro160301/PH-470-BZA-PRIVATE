@@ -1,7 +1,5 @@
 package com.service.Balanzas.Interfaz;
 
-import java.util.concurrent.CountDownLatch;
-
 public interface Balanza {
     interface Struct{
         void setID(int numID,int numBza);

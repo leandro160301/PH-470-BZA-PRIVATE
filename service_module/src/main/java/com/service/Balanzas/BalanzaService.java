@@ -5,26 +5,23 @@ import static com.service.Utils.Mensaje;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.service.Balanzas.Clases.ITW410;
 import com.service.Balanzas.Clases.MINIMA_I;
+import com.service.Balanzas.Clases.OPTIMA_I;
+import com.service.Balanzas.Clases.R31P30_I;
 import com.service.Balanzas.Fragments.ServiceFragment;
 import com.service.Balanzas.Interfaz.Balanza;
-import com.service.Balanzas.Clases.OPTIMA_I;
-import com.service.Balanzas.Interfaz.modbus;
 import com.service.Balanzas.Interfaz.serviceDevice;
 import com.service.Comunicacion.OnFragmentChangeListener;
-import com.service.Balanzas.Clases.R31P30_I;
 import com.service.Impresora.ImprimirEstandar;
 import com.service.Modbus.ModbusMasterRtu;
 import com.service.Modbus.Req.ModbusReqRtuMaster;
 import com.service.PuertosSerie.PuertosSerie2;
 import com.service.R;
 import com.service.Utils;
-import com.zgkxzx.modbus4And.requset.ModbusReq;
 
 import java.io.Serializable;
 import java.util.ArrayList;

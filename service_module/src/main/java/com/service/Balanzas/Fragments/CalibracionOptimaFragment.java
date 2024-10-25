@@ -7,7 +7,6 @@ import static com.service.Utils.getHora;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -26,7 +25,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,13 +32,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-
 import com.service.Balanzas.BalanzaService;
 import com.service.Balanzas.Clases.OPTIMA_I;
 import com.service.Comunicacion.ButtonProvider;
 import com.service.Comunicacion.ButtonProviderSingleton;
 import com.service.Comunicacion.OnFragmentChangeListener;
-import com.service.PuertosSerie.PuertosSerie;
 import com.service.PuertosSerie.PuertosSerie2;
 import com.service.R;
 

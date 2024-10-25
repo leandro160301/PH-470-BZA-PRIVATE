@@ -13,6 +13,7 @@ public class NavigationItems {
     // Scale (Settings)
     public static final int ITEM_FECHA_Y_HORA = 0;
     public static final int ITEM_TEMA = 1;
+    public static final int ITEM_BLOQUEO = 2;
 
     // Settings
     public static final int ITEM_PROGRAMA = 0;

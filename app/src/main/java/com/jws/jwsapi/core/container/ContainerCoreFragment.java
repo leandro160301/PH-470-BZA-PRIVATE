@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import com.android.jws.JwsManager;
 import com.jws.jwsapi.MainActivity;
 import com.jws.jwsapi.R;
+import com.jws.jwsapi.core.lock.LockFragment;
+import com.jws.jwsapi.core.lock.LockManager;
 import com.jws.jwsapi.core.navigation.NavigationFragment;
 import com.jws.jwsapi.core.storage.StorageDialogHandler;
 import com.jws.jwsapi.core.storage.StorageService;
@@ -35,8 +37,9 @@ public class ContainerCoreFragment extends Fragment implements ContainerButtonPr
     UserManager userManager;
     @Inject
     StorageService storageService;
+    @Inject
+    LockManager lockManager;
     private boolean stoped = false;
-
     private MainActivity mainActivity;
     private JwsManager jwsManager;
 
@@ -75,6 +78,7 @@ public class ContainerCoreFragment extends Fragment implements ContainerButtonPr
         binding.lnMenu.setOnClickListener(view1 -> mainActivity.mainClass.openFragment(new NavigationFragment()));
         binding.lnUser.setOnClickListener(view13 -> userManager.loginDialog(mainActivity));
         binding.btWifi.setOnClickListener(view12 -> new ContainerDataDialog(this, mainActivity).showDialog());
+        binding.btPadlock.setOnClickListener(v -> mainActivity.mainClass.openFragment(new LockFragment()));
     }
 
     @SuppressWarnings("unchecked")
@@ -105,6 +109,7 @@ public class ContainerCoreFragment extends Fragment implements ContainerButtonPr
                 containerUI.updateUserUi(binding.imuser, binding.tvUser);
                 containerUI.updateNetworkUi(binding.btWifi, jwsManager);
                 containerUI.updateDate(binding.btUsb, binding.tvDate);
+                binding.btPadlock.setVisibility(lockManager.isLockedEnabled() ? View.VISIBLE : View.GONE);
                 if (!stoped) {
                     handler.postDelayed(this, 100);
                 }

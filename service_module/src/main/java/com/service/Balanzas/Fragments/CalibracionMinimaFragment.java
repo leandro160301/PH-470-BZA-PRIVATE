@@ -6,7 +6,6 @@ import static com.service.Utils.getHora;
 
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
-import android.app.Service;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -35,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
 
 import com.service.Balanzas.BalanzaService;
 import com.service.Balanzas.Clases.MINIMA_I;

@@ -14,7 +14,6 @@ import com.service.Balanzas.BalanzaService;
 import com.service.Balanzas.Fragments.CalibracionOptimaFragment;
 import com.service.Balanzas.Interfaz.Balanza;
 import com.service.Comunicacion.OnFragmentChangeListener;
-import com.service.PuertosSerie.PuertosSerie;
 import com.service.PuertosSerie.PuertosSerie2;
 import com.service.R;
 import com.service.Utils;
@@ -26,8 +25,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
-
-import kotlin.text.Regex;
 
 public class OPTIMA_I implements Balanza.Struct, Serializable {
 
@@ -375,11 +372,6 @@ public class OPTIMA_I implements Balanza.Struct, Serializable {
     @Override
     public void escribir(String msj,int numBza) {
         serialPort.write(msj);
-    }
-
-    public void setTara(float tara){
-        Tara=tara;
-        taraStr=String.valueOf(tara);
     }
 
     public void setTaraDigital(float tara){

@@ -1,6 +1,7 @@
 package com.jws.jwsapi.core.navigation;
 
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_BALANZA;
+import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_BLOQUEO;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_ENTRADAS;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_ETHERNET;
 import static com.jws.jwsapi.core.navigation.NavigationItems.ITEM_ETIQUETAS;
@@ -42,6 +43,7 @@ import com.jws.jwsapi.core.data.local.PreferencesManager;
 import com.jws.jwsapi.core.gpio.GpioFragment;
 import com.jws.jwsapi.core.label.LabelFragment;
 import com.jws.jwsapi.core.label.LabelProgramFragment;
+import com.jws.jwsapi.core.lock.LockFragment;
 import com.jws.jwsapi.core.network.EthernetFragment;
 import com.jws.jwsapi.core.network.WifiFragment;
 import com.jws.jwsapi.core.printer.PrinterFragment;
@@ -59,7 +61,6 @@ import com.jws.jwsapi.utils.ThemeInterface;
 import com.jws.jwsapi.utils.ToastHelper;
 import com.jws.jwsapi.utils.date.DateDialog;
 import com.jws.jwsapi.utils.date.DateInterface;
-import com.service.Balanzas.Fragments.ServiceFragment;
 import com.service.Comunicacion.ButtonProvider;
 import com.service.Comunicacion.ButtonProviderSingleton;
 
@@ -223,6 +224,9 @@ public class NavigationFragment extends Fragment implements AdapterCommon.ItemCl
                 break;
             case ITEM_TEMA:
                 handleUserAction(() -> new ThemeDialog(getContext(), this).showDialog(), ROLE_OPERATOR);
+                break;
+            case ITEM_BLOQUEO:
+                mainActivity.mainClass.openFragment(new LockFragment());
                 break;
         }
     }

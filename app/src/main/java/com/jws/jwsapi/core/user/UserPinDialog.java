@@ -31,9 +31,9 @@ public class UserPinDialog {
 
         binding.tvpin.setOnClickListener(view -> keyboardInt(binding.tvpin, null, context, null));
         binding.btGenerar.setOnClickListener(view -> {
-            int Codigo = randomNumber();
-            newPin[0] = getNewPin(Codigo);
-            binding.tvCodigo.setText(String.valueOf(Codigo));
+            int code = randomNumber();
+            newPin[0] = getNewPin(code);
+            binding.tvCodigo.setText(String.valueOf(code));
         });
 
         binding.buttonc.setOnClickListener(view -> dialog.cancel());

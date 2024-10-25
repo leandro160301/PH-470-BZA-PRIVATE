@@ -243,7 +243,6 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
             }
         });
 
-
     }
 
     private void createWeighing() {
@@ -273,6 +272,5 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
         if (getActivity() != null) {
             getActivity().runOnUiThread(this::createWeighing);
         }
-
     }
 }
