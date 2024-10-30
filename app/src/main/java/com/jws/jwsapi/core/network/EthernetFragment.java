@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import com.android.jws.JwsManager;
 import com.jws.jwsapi.MainActivity;
 import com.jws.jwsapi.R;
+import com.jws.jwsapi.core.container.button.ButtonConfig;
+import com.jws.jwsapi.core.container.button.ButtonConfigurator;
 import com.jws.jwsapi.core.data.local.PreferencesManager;
 import com.jws.jwsapi.databinding.StandarEthernetBinding;
 import com.jws.jwsapi.utils.NetworkUtils;
@@ -162,18 +164,18 @@ public class EthernetFragment extends Fragment {
     }
 
     private void setupButtons() {
-        if (buttonProvider != null) {
-            buttonProvider.getTitle().setText(R.string.title_fragment_ethernet);
-            buttonProvider.getButton1().setBackgroundResource(R.drawable.boton_atras_i);
-            buttonProvider.getButton1().setVisibility(View.INVISIBLE);
-            buttonProvider.getButton2().setVisibility(View.INVISIBLE);
-            buttonProvider.getButton3().setVisibility(View.INVISIBLE);
-            buttonProvider.getButton4().setVisibility(View.INVISIBLE);
-            buttonProvider.getButton5().setVisibility(View.INVISIBLE);
-            buttonProvider.getButton6().setVisibility(View.INVISIBLE);
-
-            buttonProvider.getButtonHome().setOnClickListener(view -> mainActivity.mainClass.openFragmentPrincipal());
-        }
+        Integer[] buttonBackgroundResIds = {null, null, null, null, null, null};
+        Boolean[] buttonVisibilities = {false, false, false, false, false, false};
+        View.OnClickListener[] buttonClickListeners = {null, null, null, null, null, null};
+        View.OnClickListener homeClickListener = v -> mainActivity.mainClass.openFragmentPrincipal();
+        ButtonConfig config = new ButtonConfig(
+                R.string.title_fragment_ethernet,
+                buttonBackgroundResIds,
+                buttonVisibilities,
+                buttonClickListeners,
+                homeClickListener
+        );
+        ButtonConfigurator.configureButtons(buttonProvider, config);
     }
 
 }

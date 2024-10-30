@@ -18,6 +18,7 @@ import com.jws.jwsapi.core.user.UserManager;
 import com.jws.jwsapi.pallet.PalletApi;
 import com.jws.jwsapi.pallet.PalletDao;
 import com.jws.jwsapi.pallet.PalletService;
+import com.jws.jwsapi.shared.ApiPreferences;
 import com.jws.jwsapi.shared.PalletRepository;
 import com.jws.jwsapi.shared.UserRepository;
 import com.jws.jwsapi.shared.WeighRepository;
@@ -41,8 +42,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppModule {
 
     private static final String DATABASE_NAME = "bza-database";
-    //private static final String BASE_URL = "https://blancaluna.applog.com.ar/";
-    private static final String BASE_URL = "http://10.41.0.78:8080/";
     private static final String PREFS_NAME = "bza_pref";
 
     @Provides
@@ -88,9 +87,9 @@ public class AppModule {
     }
 
     @Provides
-    public Retrofit provideRetrofit() {
+    public Retrofit provideRetrofit(ApiPreferences apiPreferences) {
         return new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(apiPreferences.getUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

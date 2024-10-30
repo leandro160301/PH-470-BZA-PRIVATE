@@ -33,17 +33,16 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class LockFragment extends Fragment {
 
-    private static final int randomCode = randomNumber();
-    private static final String code1 = LockManager.getCode1(randomCode);
-    private static final String code2 = LockManager.getCode2(randomCode);
-    private static final String code3 = LockManager.getCode3(randomCode);
-    private static final String code4 = LockManager.getCode4(randomCode);
     @Inject
     LockPreferences preferences;
     @Inject
     UserRepository userRepository;
     @Inject
     LockManager lockManager;
+    private String code1;
+    private String code2;
+    private String code3;
+    private String code4;
     private FragmentLockerBinding binding;
     private ButtonProvider buttonProvider;
     private MainActivity mainActivity;
@@ -59,6 +58,12 @@ public class LockFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainActivity = (MainActivity) getActivity();
+
+        int randomCode = randomNumber();
+        code1 = LockManager.getCode1(randomCode);
+        code2 = LockManager.getCode2(randomCode);
+        code3 = LockManager.getCode3(randomCode);
+        code4 = LockManager.getCode4(randomCode);
 
         if (userRepository.getLevelUser() < ROLE_PROGRAMMER) {
             binding.lnDay.setVisibility(View.GONE);

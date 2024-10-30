@@ -45,12 +45,17 @@ public class ApiFragment extends Fragment {
 
         binding.tvApiScale.setText(String.valueOf(apiPreferences.getScaleCode()));
 
+        binding.tvApiUrl.setText(apiPreferences.getUrl());
+
         setOnClickListeners();
 
     }
 
     private void setOnClickListeners() {
-        binding.tvApiScale.setOnClickListener(v -> keyboard(binding.tvApiScale, getString(R.string.dialog_api_scale_code), getContext(), code -> apiPreferences.setScaleCode(code)));
+        binding.tvApiScale.setOnClickListener(v ->
+                keyboard(binding.tvApiScale, getString(R.string.dialog_api_scale_code), getContext(), code -> apiPreferences.setScaleCode(code)));
+        binding.tvApiUrl.setOnClickListener(v ->
+                keyboard(binding.tvApiUrl, "Ingrese la url del servidor", getContext(), code -> apiPreferences.setUrl(code)));
     }
 
     private void setupButtons() {
