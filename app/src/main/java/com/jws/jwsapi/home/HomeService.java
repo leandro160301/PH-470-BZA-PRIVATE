@@ -41,6 +41,7 @@ public class HomeService {
                         labelManager.setCode(pallet.getCode());
                         labelManager.setNumber(String.valueOf(pallet.getDone()));
                         labelManager.setOrigin(pallet.getOriginPallet());
+                        labelManager.setSerialNumber(pallet.getSerialNumber());
                         labelManager.setName(pallet.getName());
                         PrinterManager printerManager = new PrinterManager(mainActivity, mainActivity, userRepository, printerPreferences, labelManager, weighRepository);
                         printerManager.printLabelInMemory(serialPort, 0);

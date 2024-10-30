@@ -17,6 +17,7 @@ public class LabelManager {
     private final PrinterObject<String> number = new PrinterObject<>();
     private final PrinterObject<String> origin = new PrinterObject<>();
     private final PrinterObject<String> destination = new PrinterObject<>();
+    private final PrinterObject<String> serialNumber = new PrinterObject<>();
     public List<String> nameLabelList = new ArrayList<>();
     public List<Printer> varPrinterList;
     public List<String> constantPrinterList;
@@ -50,6 +51,7 @@ public class LabelManager {
         varPrinterList.add(new Printer("", number, "Numero de pesada", varPrinterList.size()));
         varPrinterList.add(new Printer("", origin, "Origen", varPrinterList.size()));
         varPrinterList.add(new Printer("", destination, "Destino", varPrinterList.size()));
+        varPrinterList.add(new Printer("", serialNumber, "Numero de serie", varPrinterList.size()));
 
     }
 
@@ -75,6 +77,10 @@ public class LabelManager {
 
     public void setDestination(String destination) {
         this.destination.value = destination;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber.value = serialNumber;
     }
 
 }
