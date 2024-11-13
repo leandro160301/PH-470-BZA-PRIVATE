@@ -88,8 +88,17 @@ public class AppModule {
 
     @Provides
     public Retrofit provideRetrofit(ApiPreferences apiPreferences) {
+        try {
+            return new Retrofit.Builder()
+                    .baseUrl(apiPreferences.getUrl())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new Retrofit.Builder()
-                .baseUrl(apiPreferences.getUrl())
+                .baseUrl("https://blancaluna.applog.com.ar/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

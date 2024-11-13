@@ -48,6 +48,10 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     PalletRepository palletRepository;
     @Inject
     ScaleViewModel.Factory viewModelFactory;
+    String tare;
+    String net;
+    String gross;
+    String unit;
     private HomeFragmentBinding binding;
     private ContainerButtonProvider buttonProvider;
     private MainActivity mainActivity;
@@ -164,7 +168,12 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
         if (weighingResponse != null) {
             if (weighingResponse.getStatus() != null && weighingResponse.getStatus()) {
                 showMessage(requireContext().getString(R.string.toast_message_weighing_created), R.layout.item_customtoastok);
-                homeService.print(mainActivity, serviceScaleViewModel.getScaleService().getSerialPort(repository.getScaleNumber()));
+                if (tare != null && gross != null && net != null && unit != null) {
+                    homeService.print(mainActivity,
+                            serviceScaleViewModel.getScaleService().getSerialPort(repository.getScaleNumber()),
+                            net, gross, tare, unit);
+                }
+
             } else if (weighingResponse.getError() != null) {
                 showMessage(weighingResponse.getError(), R.layout.item_customtoasterror);
             }
@@ -246,11 +255,11 @@ public class HomeFragment extends Fragment implements ScaleConformationListener 
     }
 
     private void createWeighing() {
-        String unit = repository.getUnit().getValue();
-        String tare = repository.getTare().getValue();
-        String net = repository.getNetStr().getValue();
-        String gross = repository.getGrossStr().getValue();
-        if (unit != null && tare != null && net != null && gross != null) {
+        unit = repository.getUnit().getValue();
+        tare = repository.getTare().getValue();
+        net = repository.getNetStr().getValue();
+        gross = repository.getGrossStr().getValue();
+        if (unit != null && tare != null && net != null && gross != null && unit != null) {
             weighingViewModel.createWeighing(gross, net, tare, unit);
         }
     }

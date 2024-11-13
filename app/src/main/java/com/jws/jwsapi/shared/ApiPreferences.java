@@ -10,7 +10,10 @@ public class ApiPreferences {
     private static final String DEFAULT_SCALE = "c16c9ac1deca7c4db51e8c73800d4ced";
 
     private static final String PREF_URL = "api_url";
-    private static final String DEFAULT_URL = "http://10.41.0.78:8080/";//"https://blancaluna.applog.com.ar/"; //"http://10.41.0.78:8080/"
+    private static final String DEFAULT_URL = "http://10.41.0.78:8080/";
+    //"https://blancaluna.applog.com.ar/";
+    // "http://10.41.0.78:8080/"
+    // "https://blancaluna.applog.com.ar/apiBalanza/";
 
     private final PreferencesHelper preferencesHelper;
 

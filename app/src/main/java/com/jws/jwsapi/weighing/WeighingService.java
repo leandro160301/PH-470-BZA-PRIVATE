@@ -29,9 +29,9 @@ public class WeighingService {
                         palletDao.incrementDoneById(id);
                         palletDao.updatePalletSerialNumber(id, weighing.getSerialNumber());
                         palletDao.updatePalletTotalNet(id, weighing.getNet());
-                        if (pallet != null && weighing.getQuantity() == pallet.getDone() + 1) {
-                            palletDao.updatePalletClosedStatus(id, true);
-                        }
+//                        if (pallet != null && weighing.getQuantity() == pallet.getDone() + 1) {
+//                            palletDao.updatePalletClosedStatus(id, true);
+//                        }
                     }
 
                 });

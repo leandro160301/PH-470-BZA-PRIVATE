@@ -29,13 +29,16 @@ public class HomeService {
         this.palletRepository = palletRepository;
     }
 
-    public void print(MainActivity mainActivity, PuertosSerie2 serialPort) {
+    public void print(MainActivity mainActivity, PuertosSerie2 serialPort, String net, String gross, String tare, String unit) {
         Runnable myRunnable = () -> {
             try {
                 Thread.sleep(500);
                 try {
                     Pallet pallet = palletRepository.getCurrentPallet().getValue();
                     if (pallet != null) {
+                        labelManager.setGrossProduct(gross + unit);
+                        labelManager.setNetProduct(net + unit);
+                        labelManager.setTareProduct(tare + unit);
                         labelManager.setDestination(pallet.getDestinationPallet());
                         labelManager.setScale(String.valueOf(weighRepository.getScaleNumber()));
                         labelManager.setCode(pallet.getCode());
@@ -45,7 +48,6 @@ public class HomeService {
                         labelManager.setName(pallet.getName());
                         PrinterManager printerManager = new PrinterManager(mainActivity, mainActivity, userRepository, printerPreferences, labelManager, weighRepository);
                         printerManager.printLabelInMemory(serialPort, 0);
-                        weighRepository.setTare();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

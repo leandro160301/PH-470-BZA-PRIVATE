@@ -10,11 +10,17 @@ import com.jws.jwsapi.pallet.Pallet;
 import com.jws.jwsapi.shared.ApiPreferences;
 import com.jws.jwsapi.shared.PalletRepository;
 import com.jws.jwsapi.shared.UserRepository;
+import com.jws.jwsapi.utils.Utils;
+import com.jws.jwsapi.utils.date.DateUtils;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import au.com.bytecode.opencsv.CSVWriter;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -97,11 +103,13 @@ public class WeighingViewModel extends ViewModel {
         }
     }
 
-    public void createWeighingRequest(WeighingRequest weighingRequest, Weighing weighing) {
+    public void createWeighingRequest(WeighingRequest weighingRequest, Weighing weighing) throws IOException {
         loading.setValue(true);
         Integer id = repository.getCurrentPalletId();
         Pallet pallet = currentPallet.getValue();
         if (pallet != null && id != null && id > -1) {
+            System.out.println("Agregando nuevo dato a csv "+ DateUtils.getHour());
+            writeCsv();
             Disposable disposable = weighingService.newWeighing(weighingRequest, weighing, id, pallet)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -114,6 +122,12 @@ public class WeighingViewModel extends ViewModel {
         } else {
             error.setValue("id null");
         }
+    }
+
+    private void writeCsv() throws IOException {
+        CSVWriter writer = new CSVWriter(new FileWriter(("/storage/emulated/0/Memoria/log.csv"),true),',');
+        writer.writeNext(new String[]{DateUtils.getHour()});
+        writer.close();
     }
 
     @Override

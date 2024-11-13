@@ -30,12 +30,7 @@ public class PalletService {
                         pallet.setClosed(false);
                         pallet.setTotalNet("0");
                         pallet.setApiNet(palletResponse.getData().getApiNet());
-                        String lastSerialNumber = palletDao.getMaxSerialNumberFromPallet(palletRequest.getOriginPallet());
-                        if (lastSerialNumber != null) {
-                            pallet.setSerialNumber(lastSerialNumber);
-                        } else {
-                            pallet.setSerialNumber(palletResponse.getData().getSerialNumber());
-                        }
+                        pallet.setSerialNumber(palletResponse.getData().getSerialNumber());
                         palletDao.insertPallet(pallet);
                     }
                 });
